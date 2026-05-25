@@ -5,13 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Warm dawn palette — humanity rising at sunrise */
-  --color-space-black: #f6efe4;     /* warm ivory canvas */
-  --color-space-deep: #efe5d2;      /* soft sand surface */
-  --color-ivory: #1a1410;           /* deep cocoa text (kept name for compat) */
-  --color-gold-dust: #b8862f;       /* warm gold */
-  --color-celestial: #c4623a;       /* terracotta */
-  --color-aurora: #6b8e5a;          /* olive-sage */
+  --color-space-black: #050505;
+  --color-space-deep: #08090d;
+  --color-ivory: #fdfcf0;
+  --color-gold-dust: #c5a059;
+  --color-celestial: #6ea8ff;
+  --color-aurora: #6fe3b6;
   --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
@@ -44,25 +43,25 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #f6efe4;
-  --foreground: #1a1410;
-  --card: #fbf6ec;
-  --card-foreground: #1a1410;
-  --popover: #fbf6ec;
-  --popover-foreground: #1a1410;
-  --primary: #1a1410;
-  --primary-foreground: #f6efe4;
-  --secondary: #ece1cb;
-  --secondary-foreground: #1a1410;
-  --muted: #ece1cb;
-  --muted-foreground: rgba(26, 20, 16, 0.6);
-  --accent: #b8862f;
-  --accent-foreground: #fbf6ec;
-  --destructive: #c0392b;
-  --destructive-foreground: #fbf6ec;
-  --border: rgba(26, 20, 16, 0.12);
-  --input: rgba(26, 20, 16, 0.1);
-  --ring: rgba(184, 134, 47, 0.45);
+  --background: #050505;
+  --foreground: #fdfcf0;
+  --card: #08090d;
+  --card-foreground: #fdfcf0;
+  --popover: #08090d;
+  --popover-foreground: #fdfcf0;
+  --primary: #fdfcf0;
+  --primary-foreground: #050505;
+  --secondary: #14151a;
+  --secondary-foreground: #fdfcf0;
+  --muted: #14151a;
+  --muted-foreground: rgba(253, 252, 240, 0.5);
+  --accent: #c5a059;
+  --accent-foreground: #050505;
+  --destructive: #ef4444;
+  --destructive-foreground: #fdfcf0;
+  --border: rgba(253, 252, 240, 0.08);
+  --input: rgba(253, 252, 240, 0.1);
+  --ring: rgba(197, 160, 89, 0.4);
 }
 
 @layer base {
@@ -77,8 +76,8 @@
     -webkit-font-smoothing: antialiased;
   }
   ::selection {
-    background-color: rgba(184, 134, 47, 0.3);
-    color: #1a1410;
+    background-color: rgba(197, 160, 89, 0.3);
+    color: #fdfcf0;
   }
 }
 
@@ -87,7 +86,7 @@
     font-family: var(--font-display);
   }
   .earth-glow {
-    background: radial-gradient(circle at center, rgba(196, 98, 58, 0.22) 0%, rgba(246, 239, 228, 0) 70%);
+    background: radial-gradient(circle at center, rgba(110, 168, 255, 0.18) 0%, rgba(5, 5, 5, 0) 70%);
   }
   .grain-overlay {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
