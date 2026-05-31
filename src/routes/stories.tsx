@@ -22,6 +22,14 @@ export const Route = createFileRoute("/stories")({
         content: "Read the invisible threads holding the world together.",
       },
       { property: "og:url", content: "https://huma-constellation-connect.lovable.app/stories" },
+      {
+        property: "og:image",
+        content: "https://huma-constellation-connect.lovable.app/og/og-stories.jpg",
+      },
+      {
+        name: "twitter:image",
+        content: "https://huma-constellation-connect.lovable.app/og/og-stories.jpg",
+      },
     ],
     links: [
       { rel: "canonical", href: "https://huma-constellation-connect.lovable.app/stories" },

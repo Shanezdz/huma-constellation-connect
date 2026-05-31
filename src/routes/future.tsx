@@ -22,6 +22,14 @@ export const Route = createFileRoute("/future")({
         content: "When cooperation becomes infrastructure.",
       },
       { property: "og:url", content: "https://huma-constellation-connect.lovable.app/future" },
+      {
+        property: "og:image",
+        content: "https://huma-constellation-connect.lovable.app/og/og-future.jpg",
+      },
+      {
+        name: "twitter:image",
+        content: "https://huma-constellation-connect.lovable.app/og/og-future.jpg",
+      },
     ],
     links: [
       { rel: "canonical", href: "https://huma-constellation-connect.lovable.app/future" },
