@@ -25,6 +25,14 @@ export const Route = createFileRoute("/constellation")({
         property: "og:url",
         content: "https://huma-constellation-connect.lovable.app/constellation",
       },
+      {
+        property: "og:image",
+        content: "https://huma-constellation-connect.lovable.app/og/og-constellation.jpg",
+      },
+      {
+        name: "twitter:image",
+        content: "https://huma-constellation-connect.lovable.app/og/og-constellation.jpg",
+      },
     ],
     links: [
       {
