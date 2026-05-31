@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://huma-constellation-connect.lovable.app/sitemap.xml

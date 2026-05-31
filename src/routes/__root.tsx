@@ -66,25 +66,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HUMA — Mapping the invisible architecture of human solidarity" },
+      { title: "HUMA — A living constellation of human solidarity" },
       {
         name: "description",
         content:
-          "HUMA is a living constellation of human solidarity — a poetic operating system that maps care, mentorship, and collaboration across the world.",
+          "HUMA is a visionary digital ecosystem that visualizes, connects, and amplifies global human solidarity.",
       },
-      { property: "og:title", content: "HUMA — Mapping the invisible architecture of human solidarity" },
-      {
-        property: "og:description",
-        content: "Mapping the invisible architecture of human solidarity.",
-      },
+      { property: "og:site_name", content: "HUMA" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "HUMA — Mapping the invisible architecture of human solidarity" },
-      { name: "description", content: "HUMA is a visionary digital ecosystem that visualizes, connects, and amplifies global human solidarity." },
-      { property: "og:description", content: "HUMA is a visionary digital ecosystem that visualizes, connects, and amplifies global human solidarity." },
-      { name: "twitter:description", content: "HUMA is a visionary digital ecosystem that visualizes, connects, and amplifies global human solidarity." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/84f6d042-7d50-4030-b5d9-a2076253bd5a/id-preview-1ce4494c--8dab1ca6-5b82-4c36-a5e5-4107b90614de.lovable.app-1779739208580.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/84f6d042-7d50-4030-b5d9-a2076253bd5a/id-preview-1ce4494c--8dab1ca6-5b82-4c36-a5e5-4107b90614de.lovable.app-1779739208580.png" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
