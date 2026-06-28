@@ -843,17 +843,141 @@ export function FutureHumanity() {
           number="06"
           kicker="Horizon"
           title="Future Humanity"
-          description="A speculative, hopeful sketch of what comes next when cooperation becomes infrastructure."
+          description="A speculative, hopeful sketch of what comes next when cooperation becomes infrastructure. Not a prediction. An invitation."
         />
 
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-3">
-          {FUTURES.map((f) => (
-            <div key={f.n} className="bg-space-black p-10">
-              <div className="font-display text-xs tracking-[0.4em] text-gold-dust">{f.n}</div>
-              <h2 className="mt-8 font-display text-2xl font-light text-ivory">{f.title}</h2>
-              <p className="mt-4 text-sm leading-relaxed text-ivory/50">{f.body}</p>
-            </div>
+        {/* Three futures — long-form editorial */}
+        <div className="space-y-32">
+          {FUTURES.map((f, idx) => (
+            <article
+              key={f.n}
+              className={`grid grid-cols-1 gap-12 md:grid-cols-12 ${idx % 2 === 1 ? "md:flex-row-reverse" : ""}`}
+            >
+              <div className={`md:col-span-4 ${idx % 2 === 1 ? "md:col-start-9" : ""}`}>
+                <div className="sticky top-32 space-y-8">
+                  <div className="font-display text-6xl font-light text-gold-dust/20 md:text-8xl">
+                    {f.n}
+                  </div>
+                  <div>
+                    <h2 className="font-display text-3xl font-light text-ivory md:text-4xl">
+                      {f.title}
+                    </h2>
+                    <p className="mt-4 text-sm leading-relaxed text-ivory/50">{f.subtitle}</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4 border-y border-ivory/10 py-6">
+                    {f.metrics.map((m) => (
+                      <div key={m.l} className="text-center">
+                        <div className="font-display text-xl font-light text-gold-dust md:text-2xl">
+                          {m.v}
+                        </div>
+                        <div className="mt-1 text-[9px] uppercase leading-tight tracking-[0.2em] text-ivory/40">
+                          {m.l}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="rounded-xl border-l border-gold-dust/40 bg-space-deep/30 p-6">
+                    <p className="text-sm italic leading-relaxed text-ivory/70">{f.principle}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`md:col-span-7 ${idx % 2 === 1 ? "md:col-start-1 md:row-start-1" : "md:col-start-6"}`}>
+                <p className="text-lg font-light leading-relaxed text-ivory/80 md:text-xl">
+                  {f.body}
+                </p>
+                <div className="mt-10 space-y-8">
+                  {f.chapters.map((chapter, cidx) => (
+                    <p
+                      key={cidx}
+                      className="text-sm leading-[1.8] text-ivory/55 first-letter:font-display first-letter:text-2xl first-letter:text-gold-dust"
+                    >
+                      {chapter}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </article>
           ))}
+        </div>
+
+        {/* Horizon timeline */}
+        <div className="mt-32">
+          <div className="mb-16 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              Horizon
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+              Four milestones toward the next civilization
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-ivory/50">
+              The future is not a single invention. It is a sequence of agreements about what we value
+              and how we share it.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 w-px bg-ivory/10 md:left-1/2" />
+            <div className="space-y-16">
+              {FUTURE_HORIZONS.map((h, idx) => (
+                <div
+                  key={h.year}
+                  className={`relative grid grid-cols-1 gap-8 md:grid-cols-2 ${idx % 2 === 1 ? "md:text-right" : ""}`}
+                >
+                  <div className={`md:px-12 ${idx % 2 === 1 ? "md:col-start-2" : ""}`}>
+                    <div className="font-display text-4xl font-light md:text-5xl ${h.tone}">{h.year}</div>
+                    <h3 className="mt-3 font-display text-xl font-light text-ivory">{h.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ivory/50">{h.body}</p>
+                  </div>
+                  <div
+                    className={`absolute top-2 left-4 h-3 w-3 rounded-full bg-gold-dust shadow-[0_0_14px_var(--color-gold-dust)] md:left-1/2 md:-translate-x-1/2`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Protocols */}
+        <div className="mt-32">
+          <div className="mb-16 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              Operating principles
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+              The architecture of the next map
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-2">
+            {FUTURE_PROTOCOLS.map((p, idx) => (
+              <div key={p.title} className="bg-space-black p-10">
+                <div className="font-display text-xs tracking-[0.4em] text-gold-dust">
+                  {String(idx + 1).padStart(2, "0")}
+                </div>
+                <h3 className="mt-6 font-display text-2xl font-light text-ivory">{p.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-ivory/50">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Closing meditation */}
+        <div className="mt-32 rounded-2xl border border-ivory/10 bg-space-deep px-8 py-16 text-center md:px-16 md:py-24">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+            The horizon, in one sentence
+          </span>
+          <blockquote className="mx-auto mt-8 max-w-3xl font-display text-2xl font-light leading-relaxed text-ivory md:text-3xl">
+            “The future we want is not a place we arrive at. It is a rhythm we learn to keep —
+            together, across every difference, one gesture at a time.”
+          </blockquote>
+          <div className="mt-12">
+            <Link
+              to="/offer"
+              className="inline-flex items-center gap-3 rounded-full border border-gold-dust/30 bg-gold-dust/10 px-8 py-4 text-sm tracking-[0.2em] text-gold-dust transition-all hover:bg-gold-dust/20 hover:text-ivory"
+            >
+              Begin your contribution
+            </Link>
+          </div>
         </div>
       </div>
     </section>
