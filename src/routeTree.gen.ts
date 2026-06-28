@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PulseRouteImport } from './routes/pulse'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OfferRouteImport } from './routes/offer'
+import { Route as LegalRouteImport } from './routes/legal'
 import { Route as FutureRouteImport } from './routes/future'
 import { Route as EchoRouteImport } from './routes/echo'
 import { Route as ConstellationRouteImport } from './routes/constellation'
@@ -33,9 +35,19 @@ const PulseRoute = PulseRouteImport.update({
   path: '/pulse',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OfferRoute = OfferRouteImport.update({
   id: '/offer',
   path: '/offer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FutureRoute = FutureRouteImport.update({
@@ -64,7 +76,9 @@ export interface FileRoutesByFullPath {
   '/constellation': typeof ConstellationRoute
   '/echo': typeof EchoRoute
   '/future': typeof FutureRoute
+  '/legal': typeof LegalRoute
   '/offer': typeof OfferRoute
+  '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stories': typeof StoriesRoute
@@ -74,7 +88,9 @@ export interface FileRoutesByTo {
   '/constellation': typeof ConstellationRoute
   '/echo': typeof EchoRoute
   '/future': typeof FutureRoute
+  '/legal': typeof LegalRoute
   '/offer': typeof OfferRoute
+  '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stories': typeof StoriesRoute
@@ -85,7 +101,9 @@ export interface FileRoutesById {
   '/constellation': typeof ConstellationRoute
   '/echo': typeof EchoRoute
   '/future': typeof FutureRoute
+  '/legal': typeof LegalRoute
   '/offer': typeof OfferRoute
+  '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stories': typeof StoriesRoute
@@ -97,7 +115,9 @@ export interface FileRouteTypes {
     | '/constellation'
     | '/echo'
     | '/future'
+    | '/legal'
     | '/offer'
+    | '/privacy'
     | '/pulse'
     | '/sitemap.xml'
     | '/stories'
@@ -107,7 +127,9 @@ export interface FileRouteTypes {
     | '/constellation'
     | '/echo'
     | '/future'
+    | '/legal'
     | '/offer'
+    | '/privacy'
     | '/pulse'
     | '/sitemap.xml'
     | '/stories'
@@ -117,7 +139,9 @@ export interface FileRouteTypes {
     | '/constellation'
     | '/echo'
     | '/future'
+    | '/legal'
     | '/offer'
+    | '/privacy'
     | '/pulse'
     | '/sitemap.xml'
     | '/stories'
@@ -128,7 +152,9 @@ export interface RootRouteChildren {
   ConstellationRoute: typeof ConstellationRoute
   EchoRoute: typeof EchoRoute
   FutureRoute: typeof FutureRoute
+  LegalRoute: typeof LegalRoute
   OfferRoute: typeof OfferRoute
+  PrivacyRoute: typeof PrivacyRoute
   PulseRoute: typeof PulseRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoriesRoute: typeof StoriesRoute
@@ -157,11 +183,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PulseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/offer': {
       id: '/offer'
       path: '/offer'
       fullPath: '/offer'
       preLoaderRoute: typeof OfferRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/future': {
@@ -200,7 +240,9 @@ const rootRouteChildren: RootRouteChildren = {
   ConstellationRoute: ConstellationRoute,
   EchoRoute: EchoRoute,
   FutureRoute: FutureRoute,
+  LegalRoute: LegalRoute,
   OfferRoute: OfferRoute,
+  PrivacyRoute: PrivacyRoute,
   PulseRoute: PulseRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoriesRoute: StoriesRoute,
