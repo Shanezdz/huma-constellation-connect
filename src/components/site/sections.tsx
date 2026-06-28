@@ -84,19 +84,102 @@ export const FUTURES = [
   {
     n: "I",
     title: "Cities of cooperation",
-    body: "Urban systems designed around mutual aid rather than extraction — neighborhoods that breathe as collectives.",
+    subtitle: "Urban systems designed around mutual aid rather than extraction",
+    body: "Neighborhoods that breathe as collectives. Streets where time, tools, harvest, and shelter are mapped as commons, not commodities.",
+    chapters: [
+      "In the cooperative city, every apartment building maintains a shared ledger of skills: who can repair a respirator, who speaks Mandarin, who has an empty room for three nights. The ledger is not owned by a municipality or a startup. It is kept by the people who use it.",
+      "Streets are re-measured by care. A wide boulevard becomes a corridor for mutual-aid kitchens, tool libraries, and solar charging stations. A narrow stairwell becomes a relay point for medicine and letters. The geometry of the city changes when the purpose of the city changes.",
+      "By 2040, the most resilient cities are not the ones with the tallest towers, but the ones with the densest mesh of reciprocity. They do not need to import solidarity during crisis; they grow it in ordinary time.",
+    ],
+    principle: "Density of trust outperforms density of capital.",
+    metrics: [
+      { v: "1 km", l: "Radius of daily mutual aid" },
+      { v: "12 min", l: "Mean response time in a cooperative block" },
+      { v: "0", l: "Profit extracted from basic care" },
+    ],
   },
   {
     n: "II",
     title: "Decentralized learning",
-    body: "Knowledge transmitted across borders without gatekeepers. A planetary library held by everyone, owned by no one.",
+    subtitle: "Knowledge transmitted across borders without gatekeepers",
+    body: "A planetary library held by everyone, owned by no one. Credentials are replaced by proof of contribution. Curiosity is the only admission ticket.",
+    chapters: [
+      "A teenager in Algiers learns surgical knot-tying from a retired nurse in Hanoi, through a five-minute looped video with no voice-over — only hand positions, light, and shadow. The video was uploaded by a medical student in Cairo who learned it from a paramedic in Karachi.",
+      "Learning is no longer a pipeline from school to job. It is a garden of paths: mentorship rings, translation collectives, open workshops, night schools in occupied basements, rooftop classrooms connected by solar mesh networks.",
+      "Degrees become footprints. A learner's portfolio is a map of what they have taught as much as what they have studied. Knowledge circulates because it is useful, not because it is priced.",
+    ],
+    principle: "What is freely taught returns multiplied.",
+    metrics: [
+      { v: "194", l: "Territories contributing to one curriculum" },
+      { v: "∞", l: "Open learning paths" },
+      { v: "0", l: "Tuition for essential skills" },
+    ],
   },
   {
     n: "III",
     title: "Ecological solidarity",
-    body: "Care for land, water, and air woven into the same map as care for one another. One continuous gesture.",
+    subtitle: "Care for land, water, and air woven into the same map as care for one another",
+    body: "One continuous gesture. The same protocol that connects a mentor to a student also connects a watershed to the people who drink from it.",
+    chapters: [
+      "A coastal village in Senegal shares its mangrove restoration method with a delta community in Bangladesh. The method is adapted, not copied. Local knowledge is tagged with climate context, tide tables, and seed sources. The exchange is not a donation; it is a peer conversation between bioregions.",
+      "Repair brigades become as common as fire brigades. Every device is designed to be fixable, and every fixable device is a small act of climate refusal. A teenager in Reykjavík teaches a retiree in Buenos Aires how to replace a battery. The battery stays out of the landfill for another four years.",
+      "By 2050, ecological care is not an activist specialty. It is the default mode of the network: resource maps shared openly, restoration labor counted as contribution, and the health of the living world treated as a common project.",
+    ],
+    principle: "The care of people and the care of place are the same protocol.",
+    metrics: [
+      { v: "1B", l: "Trees mapped by community stewards" },
+      { v: "94%", l: "Of devices repairable within the network" },
+      { v: "0", l: "Border between human and ecological aid" },
+    ],
   },
 ];
+
+const FUTURE_HORIZONS = [
+  {
+    year: "2027",
+    title: "The Protocol is Open",
+    body: "HUMA releases its solidarity protocol as a public good. Any city, collective, or platform can adopt it. No license. No gatekeeper.",
+    tone: "text-gold-dust",
+  },
+  {
+    year: "2032",
+    title: "Mesh Cities",
+    body: "The first hundred cities formalize cooperative infrastructure. Tool libraries, mutual-aid kitchens, and skill registries become standard municipal services.",
+    tone: "text-celestial",
+  },
+  {
+    year: "2038",
+    title: "Planetary Curriculum",
+    body: "A learner in any territory can access a fully translated, community-verified curriculum for essential skills — medicine, food, shelter, energy, conflict resolution.",
+    tone: "text-aurora",
+  },
+  {
+    year: "2045",
+    title: "Solidarity as Default",
+    body: "Cooperation is no longer an alternative. It is the underlying architecture of daily life. The network is invisible, resilient, and alive.",
+    tone: "text-ivory",
+  },
+];
+
+const FUTURE_PROTOCOLS = [
+  {
+    title: "Open by design",
+    body: "No algorithm, no platform, and no institution owns the map. The protocol is a commons.",
+  },
+  {
+    title: "Local by default",
+    body: "Global solidarity is built from neighborhood-scale cells. The local is the unit of resilience.",
+  },
+  {
+    title: "Anonymity as dignity",
+    body: "A gift does not need a name to be real. Recognition is optional; contribution is what counts.",
+  },
+  {
+    title: "Reciprocity, not extraction",
+    body: "Every flow of value is balanced by care. The network does not accumulate; it circulates.",
+  },
+];
+
 
 function useRotatingSubtitle() {
   const [i, setI] = useState(0);
