@@ -604,6 +604,30 @@ export function Stories() {
 }
 
 
+const PULSE_REGIONS = [
+  { region: "Africa", flows: "184,209", trend: "+12.4%", note: "Knowledge transmission accelerating in West Sahel.", tone: "text-aurora" },
+  { region: "Americas", flows: "212,847", trend: "+8.1%", note: "Mutual-aid kitchens dominate North-South corridors.", tone: "text-celestial" },
+  { region: "Asia–Pacific", flows: "276,514", trend: "+15.7%", note: "Intergenerational mentorship leads the continent.", tone: "text-gold-dust" },
+  { region: "Europe", flows: "118,302", trend: "+5.2%", note: "Listening networks growing through long winters.", tone: "text-ivory" },
+  { region: "Middle East", flows: "29,748", trend: "+22.8%", note: "Cross-border translation pulses every minute.", tone: "text-celestial" },
+  { region: "Oceania", flows: "20,399", trend: "+6.9%", note: "Island-to-island skill exchanges intensifying.", tone: "text-aurora" },
+];
+
+const PULSE_FREQUENCIES = [
+  { band: "0–30s", label: "Micro-gestures", body: "Translations, voice notes, signal boosts. The high-frequency layer of the network." },
+  { band: "1–60 min", label: "Encounters", body: "Mentorship calls, listening sessions, skill exchanges. The conversational pulse." },
+  { band: "1–30 days", label: "Commitments", body: "Recurring workshops, cohorts, repair brigades. The sustained rhythm of cooperation." },
+  { band: "1+ years", label: "Architectures", body: "Local infrastructures, learning circles, lifelong companionships. The deep frequency." },
+];
+
+const PULSE_RHYTHMS = [
+  { t: "04:00 UTC", v: "Dawn over the Pacific — listening lines peak.", tone: "text-aurora" },
+  { t: "08:00 UTC", v: "European workshops open. Translation flows multiply.", tone: "text-celestial" },
+  { t: "13:00 UTC", v: "African midday — water and food cooperatives synchronize.", tone: "text-gold-dust" },
+  { t: "19:00 UTC", v: "Americas evening — mentorship hour. Highest density of the day.", tone: "text-ivory" },
+  { t: "23:00 UTC", v: "Quiet hour. Anonymous letters and night pharmacies activate.", tone: "text-celestial" },
+];
+
 export function EarthPulse() {
   return (
     <section className="relative overflow-hidden border-y border-ivory/5 bg-space-deep px-6 py-20 md:px-12 md:py-32">
@@ -626,10 +650,107 @@ export function EarthPulse() {
             </div>
           ))}
         </div>
+
+        {/* Regional pulse */}
+        <div className="mt-32">
+          <div className="mb-12 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              Regional pulse
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+              Where the constellation is brightest
+            </h2>
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-ivory/10">
+            <div className="grid grid-cols-12 border-b border-ivory/10 bg-space-black px-6 py-4 text-[9px] uppercase tracking-[0.3em] text-ivory/40">
+              <div className="col-span-4 md:col-span-3">Region</div>
+              <div className="col-span-3 md:col-span-2">Active flows</div>
+              <div className="col-span-2">7-day</div>
+              <div className="col-span-3 hidden md:col-span-5 md:block">Signal</div>
+            </div>
+            {PULSE_REGIONS.map((r) => (
+              <div
+                key={r.region}
+                className="grid grid-cols-12 items-center border-b border-ivory/5 px-6 py-5 last:border-b-0 hover:bg-space-black/40"
+              >
+                <div className={`col-span-4 font-display text-base font-light md:col-span-3 ${r.tone}`}>
+                  {r.region}
+                </div>
+                <div className="col-span-3 font-display text-sm text-ivory md:col-span-2">
+                  {r.flows}
+                </div>
+                <div className="col-span-2 text-[10px] uppercase tracking-[0.25em] text-aurora">
+                  {r.trend}
+                </div>
+                <div className="col-span-12 mt-3 text-xs leading-relaxed text-ivory/50 md:col-span-5 md:mt-0">
+                  {r.note}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Frequencies */}
+        <div className="mt-32">
+          <div className="mb-12 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              Four frequencies
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+              The spectrum of human cooperation
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-ivory/50">
+              Solidarity is not one signal but a spectrum — from the second-long gesture to the
+              decade-long commitment. HUMA listens across all of them.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-4">
+            {PULSE_FREQUENCIES.map((f) => (
+              <div key={f.label} className="bg-space-black p-8">
+                <div className="font-display text-xs tracking-[0.3em] text-gold-dust">{f.band}</div>
+                <h3 className="mt-6 font-display text-xl font-light text-ivory">{f.label}</h3>
+                <p className="mt-4 text-xs leading-relaxed text-ivory/55">{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 24-hour rhythm */}
+        <div className="mt-32">
+          <div className="mb-12 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              A day inside the pulse
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory">
+              Twenty-four hours of the constellation
+            </h2>
+          </div>
+          <ol className="relative mx-auto max-w-3xl border-l border-ivory/15 pl-10">
+            {PULSE_RHYTHMS.map((r) => (
+              <li key={r.t} className="relative pb-10 last:pb-0">
+                <span className="absolute -left-[44px] top-1.5 h-2.5 w-2.5 rounded-full bg-gold-dust shadow-[0_0_12px_var(--color-gold-dust)]" />
+                <div className={`font-display text-sm tracking-[0.3em] ${r.tone}`}>{r.t}</div>
+                <p className="mt-2 text-sm leading-relaxed text-ivory/60">{r.v}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Closing meditation */}
+        <div className="mt-32 rounded-2xl border border-ivory/10 bg-space-black p-12 text-center md:p-16">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+            The pulse, in one sentence
+          </span>
+          <blockquote className="mx-auto mt-6 max-w-3xl font-display text-2xl font-light leading-relaxed text-ivory md:text-3xl">
+            “At any given second, somewhere on Earth, a stranger is choosing to spend an hour on
+            someone they will never meet. The pulse is the sum of those decisions.”
+          </blockquote>
+        </div>
       </div>
     </section>
   );
 }
+
 
 export function FutureHumanity() {
   return (
