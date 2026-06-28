@@ -84,19 +84,102 @@ export const FUTURES = [
   {
     n: "I",
     title: "Cities of cooperation",
-    body: "Urban systems designed around mutual aid rather than extraction — neighborhoods that breathe as collectives.",
+    subtitle: "Urban systems designed around mutual aid rather than extraction",
+    body: "Neighborhoods that breathe as collectives. Streets where time, tools, harvest, and shelter are mapped as commons, not commodities.",
+    chapters: [
+      "In the cooperative city, every apartment building maintains a shared ledger of skills: who can repair a respirator, who speaks Mandarin, who has an empty room for three nights. The ledger is not owned by a municipality or a startup. It is kept by the people who use it.",
+      "Streets are re-measured by care. A wide boulevard becomes a corridor for mutual-aid kitchens, tool libraries, and solar charging stations. A narrow stairwell becomes a relay point for medicine and letters. The geometry of the city changes when the purpose of the city changes.",
+      "By 2040, the most resilient cities are not the ones with the tallest towers, but the ones with the densest mesh of reciprocity. They do not need to import solidarity during crisis; they grow it in ordinary time.",
+    ],
+    principle: "Density of trust outperforms density of capital.",
+    metrics: [
+      { v: "1 km", l: "Radius of daily mutual aid" },
+      { v: "12 min", l: "Mean response time in a cooperative block" },
+      { v: "0", l: "Profit extracted from basic care" },
+    ],
   },
   {
     n: "II",
     title: "Decentralized learning",
-    body: "Knowledge transmitted across borders without gatekeepers. A planetary library held by everyone, owned by no one.",
+    subtitle: "Knowledge transmitted across borders without gatekeepers",
+    body: "A planetary library held by everyone, owned by no one. Credentials are replaced by proof of contribution. Curiosity is the only admission ticket.",
+    chapters: [
+      "A teenager in Algiers learns surgical knot-tying from a retired nurse in Hanoi, through a five-minute looped video with no voice-over — only hand positions, light, and shadow. The video was uploaded by a medical student in Cairo who learned it from a paramedic in Karachi.",
+      "Learning is no longer a pipeline from school to job. It is a garden of paths: mentorship rings, translation collectives, open workshops, night schools in occupied basements, rooftop classrooms connected by solar mesh networks.",
+      "Degrees become footprints. A learner's portfolio is a map of what they have taught as much as what they have studied. Knowledge circulates because it is useful, not because it is priced.",
+    ],
+    principle: "What is freely taught returns multiplied.",
+    metrics: [
+      { v: "194", l: "Territories contributing to one curriculum" },
+      { v: "∞", l: "Open learning paths" },
+      { v: "0", l: "Tuition for essential skills" },
+    ],
   },
   {
     n: "III",
     title: "Ecological solidarity",
-    body: "Care for land, water, and air woven into the same map as care for one another. One continuous gesture.",
+    subtitle: "Care for land, water, and air woven into the same map as care for one another",
+    body: "One continuous gesture. The same protocol that connects a mentor to a student also connects a watershed to the people who drink from it.",
+    chapters: [
+      "A coastal village in Senegal shares its mangrove restoration method with a delta community in Bangladesh. The method is adapted, not copied. Local knowledge is tagged with climate context, tide tables, and seed sources. The exchange is not a donation; it is a peer conversation between bioregions.",
+      "Repair brigades become as common as fire brigades. Every device is designed to be fixable, and every fixable device is a small act of climate refusal. A teenager in Reykjavík teaches a retiree in Buenos Aires how to replace a battery. The battery stays out of the landfill for another four years.",
+      "By 2050, ecological care is not an activist specialty. It is the default mode of the network: resource maps shared openly, restoration labor counted as contribution, and the health of the living world treated as a common project.",
+    ],
+    principle: "The care of people and the care of place are the same protocol.",
+    metrics: [
+      { v: "1B", l: "Trees mapped by community stewards" },
+      { v: "94%", l: "Of devices repairable within the network" },
+      { v: "0", l: "Border between human and ecological aid" },
+    ],
   },
 ];
+
+const FUTURE_HORIZONS = [
+  {
+    year: "2027",
+    title: "The Protocol is Open",
+    body: "HUMA releases its solidarity protocol as a public good. Any city, collective, or platform can adopt it. No license. No gatekeeper.",
+    tone: "text-gold-dust",
+  },
+  {
+    year: "2032",
+    title: "Mesh Cities",
+    body: "The first hundred cities formalize cooperative infrastructure. Tool libraries, mutual-aid kitchens, and skill registries become standard municipal services.",
+    tone: "text-celestial",
+  },
+  {
+    year: "2038",
+    title: "Planetary Curriculum",
+    body: "A learner in any territory can access a fully translated, community-verified curriculum for essential skills — medicine, food, shelter, energy, conflict resolution.",
+    tone: "text-aurora",
+  },
+  {
+    year: "2045",
+    title: "Solidarity as Default",
+    body: "Cooperation is no longer an alternative. It is the underlying architecture of daily life. The network is invisible, resilient, and alive.",
+    tone: "text-ivory",
+  },
+];
+
+const FUTURE_PROTOCOLS = [
+  {
+    title: "Open by design",
+    body: "No algorithm, no platform, and no institution owns the map. The protocol is a commons.",
+  },
+  {
+    title: "Local by default",
+    body: "Global solidarity is built from neighborhood-scale cells. The local is the unit of resilience.",
+  },
+  {
+    title: "Anonymity as dignity",
+    body: "A gift does not need a name to be real. Recognition is optional; contribution is what counts.",
+  },
+  {
+    title: "Reciprocity, not extraction",
+    body: "Every flow of value is balanced by care. The network does not accumulate; it circulates.",
+  },
+];
+
 
 function useRotatingSubtitle() {
   const [i, setI] = useState(0);
@@ -760,17 +843,141 @@ export function FutureHumanity() {
           number="06"
           kicker="Horizon"
           title="Future Humanity"
-          description="A speculative, hopeful sketch of what comes next when cooperation becomes infrastructure."
+          description="A speculative, hopeful sketch of what comes next when cooperation becomes infrastructure. Not a prediction. An invitation."
         />
 
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-3">
-          {FUTURES.map((f) => (
-            <div key={f.n} className="bg-space-black p-10">
-              <div className="font-display text-xs tracking-[0.4em] text-gold-dust">{f.n}</div>
-              <h2 className="mt-8 font-display text-2xl font-light text-ivory">{f.title}</h2>
-              <p className="mt-4 text-sm leading-relaxed text-ivory/50">{f.body}</p>
-            </div>
+        {/* Three futures — long-form editorial */}
+        <div className="space-y-32">
+          {FUTURES.map((f, idx) => (
+            <article
+              key={f.n}
+              className={`grid grid-cols-1 gap-12 md:grid-cols-12 ${idx % 2 === 1 ? "md:flex-row-reverse" : ""}`}
+            >
+              <div className={`md:col-span-4 ${idx % 2 === 1 ? "md:col-start-9" : ""}`}>
+                <div className="sticky top-32 space-y-8">
+                  <div className="font-display text-6xl font-light text-gold-dust/20 md:text-8xl">
+                    {f.n}
+                  </div>
+                  <div>
+                    <h2 className="font-display text-3xl font-light text-ivory md:text-4xl">
+                      {f.title}
+                    </h2>
+                    <p className="mt-4 text-sm leading-relaxed text-ivory/50">{f.subtitle}</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4 border-y border-ivory/10 py-6">
+                    {f.metrics.map((m) => (
+                      <div key={m.l} className="text-center">
+                        <div className="font-display text-xl font-light text-gold-dust md:text-2xl">
+                          {m.v}
+                        </div>
+                        <div className="mt-1 text-[9px] uppercase leading-tight tracking-[0.2em] text-ivory/40">
+                          {m.l}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="rounded-xl border-l border-gold-dust/40 bg-space-deep/30 p-6">
+                    <p className="text-sm italic leading-relaxed text-ivory/70">{f.principle}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`md:col-span-7 ${idx % 2 === 1 ? "md:col-start-1 md:row-start-1" : "md:col-start-6"}`}>
+                <p className="text-lg font-light leading-relaxed text-ivory/80 md:text-xl">
+                  {f.body}
+                </p>
+                <div className="mt-10 space-y-8">
+                  {f.chapters.map((chapter, cidx) => (
+                    <p
+                      key={cidx}
+                      className="text-sm leading-[1.8] text-ivory/55 first-letter:font-display first-letter:text-2xl first-letter:text-gold-dust"
+                    >
+                      {chapter}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </article>
           ))}
+        </div>
+
+        {/* Horizon timeline */}
+        <div className="mt-32">
+          <div className="mb-16 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              Horizon
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+              Four milestones toward the next civilization
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-ivory/50">
+              The future is not a single invention. It is a sequence of agreements about what we value
+              and how we share it.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 w-px bg-ivory/10 md:left-1/2" />
+            <div className="space-y-16">
+              {FUTURE_HORIZONS.map((h, idx) => (
+                <div
+                  key={h.year}
+                  className={`relative grid grid-cols-1 gap-8 md:grid-cols-2 ${idx % 2 === 1 ? "md:text-right" : ""}`}
+                >
+                  <div className={`md:px-12 ${idx % 2 === 1 ? "md:col-start-2" : ""}`}>
+                  <div className={`font-display text-4xl font-light md:text-5xl ${h.tone}`}>{h.year}</div>
+                    <h3 className="mt-3 font-display text-xl font-light text-ivory">{h.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ivory/50">{h.body}</p>
+                  </div>
+                  <div
+                    className={`absolute top-2 left-4 h-3 w-3 rounded-full bg-gold-dust shadow-[0_0_14px_var(--color-gold-dust)] md:left-1/2 md:-translate-x-1/2`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Protocols */}
+        <div className="mt-32">
+          <div className="mb-16 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              Operating principles
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+              The architecture of the next map
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-2">
+            {FUTURE_PROTOCOLS.map((p, idx) => (
+              <div key={p.title} className="bg-space-black p-10">
+                <div className="font-display text-xs tracking-[0.4em] text-gold-dust">
+                  {String(idx + 1).padStart(2, "0")}
+                </div>
+                <h3 className="mt-6 font-display text-2xl font-light text-ivory">{p.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-ivory/50">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Closing meditation */}
+        <div className="mt-32 rounded-2xl border border-ivory/10 bg-space-deep px-8 py-16 text-center md:px-16 md:py-24">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+            The horizon, in one sentence
+          </span>
+          <blockquote className="mx-auto mt-8 max-w-3xl font-display text-2xl font-light leading-relaxed text-ivory md:text-3xl">
+            “The future we want is not a place we arrive at. It is a rhythm we learn to keep —
+            together, across every difference, one gesture at a time.”
+          </blockquote>
+          <div className="mt-12">
+            <Link
+              to="/offer"
+              className="inline-flex items-center gap-3 rounded-full border border-gold-dust/30 bg-gold-dust/10 px-8 py-4 text-sm tracking-[0.2em] text-gold-dust transition-all hover:bg-gold-dust/20 hover:text-ivory"
+            >
+              Begin your contribution
+            </Link>
+          </div>
         </div>
       </div>
     </section>
