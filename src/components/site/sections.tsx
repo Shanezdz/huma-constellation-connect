@@ -484,27 +484,59 @@ export function Stories() {
           align="center"
         />
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+        <div className="space-y-32">
           {STORIES.map((s, i) => (
-            <article key={s.title} className={`group cursor-pointer ${i === 1 ? "md:mt-16" : ""}`}>
-              <div className="mb-6 aspect-[3/4] overflow-hidden border border-ivory/10 bg-space-deep">
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  loading="lazy"
-                  width={800}
-                  height={1066}
-                  className="h-full w-full object-cover grayscale transition-all duration-1000 group-hover:scale-105 group-hover:grayscale-0"
-                />
+            <article key={s.title} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+              <div className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                <div className="overflow-hidden border border-ivory/10 bg-space-deep">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    loading="lazy"
+                    width={800}
+                    height={1066}
+                    className="aspect-[3/4] h-full w-full object-cover grayscale transition-all duration-1000 hover:grayscale-0"
+                  />
+                </div>
+                <div className="mt-8 grid grid-cols-3 gap-4 border-t border-ivory/10 pt-6">
+                  {s.impact.map((m) => (
+                    <div key={m.l}>
+                      <div className={`font-display text-xl font-light ${s.accent}`}>{m.v}</div>
+                      <div className="mt-2 text-[9px] uppercase leading-tight tracking-[0.25em] text-ivory/40">
+                        {m.l}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <span className={`text-[9px] uppercase tracking-[0.3em] ${s.accent}`}>{s.place}</span>
-              <h2 className="mt-3 font-display text-xl font-light text-ivory transition-transform duration-500 group-hover:translate-x-2">
-                {s.title}
-              </h2>
-              <p className="mt-4 text-xs leading-relaxed text-ivory/50">{s.body}</p>
+
+              <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                <span className={`text-[10px] uppercase tracking-[0.4em] ${s.accent}`}>
+                  {s.place}
+                </span>
+                <h2 className="mt-4 font-display text-3xl font-light text-ivory md:text-4xl">
+                  {s.title}
+                </h2>
+                <p className="mt-6 font-display text-lg font-light italic leading-relaxed text-ivory/80">
+                  {s.body}
+                </p>
+                <div className="mt-10 space-y-6 text-sm leading-relaxed text-ivory/60">
+                  {s.chapters.map((c, ci) => (
+                    <p key={ci} className="first-letter:font-display first-letter:text-2xl first-letter:text-gold-dust">
+                      {c}
+                    </p>
+                  ))}
+                </div>
+                <figure className="mt-10 border-l border-gold-dust/40 pl-6">
+                  <blockquote className="font-display text-xl font-light leading-relaxed text-ivory">
+                    “{s.quote}”
+                  </blockquote>
+                </figure>
+              </div>
             </article>
           ))}
         </div>
+
 
         {/* Themes of the archive */}
         <div className="mt-32">
