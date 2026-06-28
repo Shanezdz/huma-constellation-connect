@@ -40,13 +40,13 @@ function LegalPage() {
 
         <Section title="Éditeur du site">
           <p>
-            HUMA — [Raison sociale à compléter par l'éditeur].
+            HUMA — Projet de plateforme numérique conçu en Algérie.
             <br />
-            Adresse : [adresse postale]
+            Lieu de conception : Algérie
             <br />
-            Contact : [email de contact]
+            Contact : shanezdz.kechroud@gmail.com
             <br />
-            Responsable de la publication : [nom du responsable]
+            Responsable de la publication : Shanez Kechroud
           </p>
         </Section>
 
@@ -77,7 +77,7 @@ function LegalPage() {
         <Section title="Contact">
           <p>
             Pour toute question relative à ces mentions ou à l'utilisation de la plateforme,
-            écrivez à : [email de contact].
+            écrivez à : shanezdz.kechroud@gmail.com.
           </p>
         </Section>
 

@@ -85,13 +85,13 @@ function PrivacyPage() {
           <p>
             Conformément au RGPD, vous disposez d'un droit d'accès, de rectification,
             d'effacement, de limitation et d'opposition au traitement de vos données. Pour
-            exercer ces droits, contactez l'éditeur à : [email de contact].
+            exercer ces droits, contactez l'éditeur à : shanezdz.kechroud@gmail.com.
           </p>
         </Section>
 
         <Section title="Contact">
           <p>
-            Pour toute question relative à la confidentialité, écrivez à : [email de contact].
+            Pour toute question relative à la confidentialité, écrivez à : shanezdz.kechroud@gmail.com.
           </p>
         </Section>
 
