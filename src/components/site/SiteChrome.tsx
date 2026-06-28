@@ -1,5 +1,89 @@
 import { Link } from "@tanstack/react-router";
-import { useMemo, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+
+const LANGS = [
+  { code: "en", label: "English", short: "EN", dir: "ltr" },
+  { code: "fr", label: "Français", short: "FR", dir: "ltr" },
+  { code: "ar", label: "العربية", short: "AR", dir: "rtl" },
+] as const;
+
+type LangCode = (typeof LANGS)[number]["code"];
+
+function LanguageSwitcher() {
+  const [open, setOpen] = useState(false);
+  const [lang, setLang] = useState<LangCode>("en");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const saved = (typeof window !== "undefined" && localStorage.getItem("huma-lang")) as LangCode | null;
+    if (saved && LANGS.some((l) => l.code === saved)) setLang(saved);
+  }, []);
+
+  useEffect(() => {
+    const entry = LANGS.find((l) => l.code === lang);
+    if (!entry) return;
+    document.documentElement.lang = entry.code;
+    document.documentElement.dir = entry.dir;
+    localStorage.setItem("huma-lang", entry.code);
+  }, [lang]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [open]);
+
+  const current = LANGS.find((l) => l.code === lang) ?? LANGS[0];
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Change language"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="flex items-center gap-2 rounded-full border border-ivory/15 px-3 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory/80 transition-all duration-300 hover:border-ivory/40 hover:text-ivory"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <ellipse cx="12" cy="12" rx="4" ry="9" />
+          <path d="M3 12h18" />
+        </svg>
+        <span>{current.short}</span>
+      </button>
+      {open && (
+        <ul
+          role="listbox"
+          className="absolute right-0 mt-3 min-w-[160px] overflow-hidden rounded-2xl border border-ivory/10 bg-space-black/95 py-2 backdrop-blur-xl"
+        >
+          {LANGS.map((l) => (
+            <li key={l.code}>
+              <button
+                type="button"
+                role="option"
+                aria-selected={l.code === lang}
+                onClick={() => {
+                  setLang(l.code);
+                  setOpen(false);
+                }}
+                className={`flex w-full items-center justify-between px-4 py-2 text-left text-[11px] tracking-[0.2em] transition-colors ${
+                  l.code === lang ? "text-ivory" : "text-ivory/50 hover:text-ivory"
+                }`}
+              >
+                <span>{l.label}</span>
+                <span className="text-[9px] uppercase tracking-[0.3em] text-gold-dust/70">{l.short}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export const NAV_LINKS = [
   { to: "/constellation", label: "The Globe" },
@@ -28,12 +112,15 @@ export function Nav() {
           </Link>
         ))}
       </div>
-      <Link
-        to="/offer"
-        className="rounded-full border border-ivory/15 px-5 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory transition-all duration-500 hover:bg-ivory hover:text-space-black"
-      >
-        Connect
-      </Link>
+      <div className="flex items-center gap-3">
+        <LanguageSwitcher />
+        <Link
+          to="/offer"
+          className="rounded-full border border-ivory/15 px-5 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory transition-all duration-500 hover:bg-ivory hover:text-space-black"
+        >
+          Connect
+        </Link>
+      </div>
     </nav>
   );
 }
