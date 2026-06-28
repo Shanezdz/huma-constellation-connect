@@ -117,8 +117,12 @@ export function ManifestoFooter() {
 
         <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-ivory/5 pt-8 text-[9px] uppercase tracking-[0.3em] text-ivory/25 md:flex-row">
           <span>© 2026 HUMA — Planetary Scale</span>
-          <span>Invisible gestures hold the world together.</span>
+          <div className="flex gap-6">
+            <Link to="/legal" className="hover:text-ivory">Mentions légales</Link>
+            <Link to="/privacy" className="hover:text-ivory">Confidentialité</Link>
+          </div>
         </div>
+
       </div>
     </footer>
   );
