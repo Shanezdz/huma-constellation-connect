@@ -6,7 +6,19 @@ import { translateBatch } from "./translate.functions";
 
 type Lang = "en" | "fr" | "ar";
 
-const CACHE_PREFIX = "huma-i18n-v1:";
+// Bump CACHE_VERSION when the prompt, model, or source copy changes
+// in a way that should invalidate every previously cached translation.
+const CACHE_VERSION = "v2";
+const CACHE_PREFIX = `huma-i18n-${CACHE_VERSION}:`;
+const LEGACY_PREFIXES = ["huma-i18n-v1:"];
+
+// In-memory mirror of the localStorage cache: avoids JSON.parse on every
+// language switch / route change after the first read.
+const memCache: Record<Lang, Record<string, string> | null> = {
+  en: null,
+  fr: null,
+  ar: null,
+};
 
 // Track original text per node so we can restore when switching back to EN
 const originals = new WeakMap<Text, string>();
@@ -19,22 +31,51 @@ function hash(str: string): string {
   return (h >>> 0).toString(36);
 }
 
-function getCache(lang: Lang): Record<string, string> {
+let legacyPruned = false;
+function pruneLegacy() {
+  if (legacyPruned) return;
+  legacyPruned = true;
   try {
-    const raw = localStorage.getItem(CACHE_PREFIX + lang);
-    return raw ? JSON.parse(raw) : {};
+    for (const p of LEGACY_PREFIXES) {
+      for (const k of Object.keys(localStorage)) {
+        if (k.startsWith(p)) localStorage.removeItem(k);
+      }
+    }
   } catch {
-    return {};
+    // ignore
   }
 }
 
-function setCache(lang: Lang, cache: Record<string, string>) {
+function getCache(lang: Lang): Record<string, string> {
+  if (memCache[lang]) return memCache[lang]!;
+  pruneLegacy();
   try {
-    localStorage.setItem(CACHE_PREFIX + lang, JSON.stringify(cache));
+    const raw = localStorage.getItem(CACHE_PREFIX + lang);
+    memCache[lang] = raw ? JSON.parse(raw) : {};
   } catch {
-    // quota — ignore
+    memCache[lang] = {};
   }
+  return memCache[lang]!;
 }
+
+let writeTimer: ReturnType<typeof setTimeout> | null = null;
+let pendingWriteLang: Lang | null = null;
+function setCache(lang: Lang, cache: Record<string, string>) {
+  memCache[lang] = cache;
+  pendingWriteLang = lang;
+  // Debounce localStorage writes — translations land in batches.
+  if (writeTimer) clearTimeout(writeTimer);
+  writeTimer = setTimeout(() => {
+    const l = pendingWriteLang;
+    if (!l) return;
+    try {
+      localStorage.setItem(CACHE_PREFIX + l, JSON.stringify(memCache[l] ?? {}));
+    } catch {
+      // quota — drop silently; memory cache still serves the session
+    }
+  }, 250);
+}
+
 
 const SKIP_TAGS = new Set([
   "SCRIPT",
