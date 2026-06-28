@@ -422,6 +422,22 @@ export function HumanEcho() {
 }
 
 
+const STORY_FRAGMENTS = [
+  { place: "Lisbon, Portugal", accent: "text-celestial", title: "The Night Pharmacy", body: "A retired chemist keeps her shutter half-open after midnight for those who cannot afford a daytime visit. No sign, no schedule — only word of mouth and trust." },
+  { place: "Medellín, Colombia", accent: "text-aurora", title: "Library on a Cable Car", body: "Volunteers ride the gondolas up the hillside neighbourhoods every Saturday with crates of books. The line to borrow is now longer than the line to ride." },
+  { place: "Tbilisi, Georgia", accent: "text-gold-dust", title: "Grandmothers' Wi-Fi", body: "An intergenerational pact: elders teach traditional polyphonic singing, teenagers teach them how to video-call grandchildren abroad. Both sides claim the better deal." },
+  { place: "Hanoi, Vietnam", accent: "text-celestial", title: "The Shared Kitchen", body: "Three families, one stove, six evenings a week. What began as a fuel-saving arrangement became the slowest, kindest dinner table in the district." },
+  { place: "Oaxaca, Mexico", accent: "text-aurora", title: "Roof Repair Brigade", body: "Whenever a storm passes, neighbours meet at dawn with ladders and clay tiles. No one keeps count — the count is the village still standing." },
+  { place: "Beirut, Lebanon", accent: "text-gold-dust", title: "Letters to the Power Cut", body: "During blackouts, a writers' collective hand-delivers handwritten letters across the city by bicycle. Reading by candle has become a ritual of presence." },
+];
+
+const STORY_THEMES = [
+  { k: "Transmission", v: "Knowledge moved across generations without institutions." },
+  { k: "Proximity", v: "Solidarity that happens within walking distance of the giver." },
+  { k: "Quiet repair", v: "Gestures that fix what was broken without naming it." },
+  { k: "Improvised infrastructure", v: "Citizens building what systems forgot to build." },
+];
+
 export function Stories() {
   return (
     <section className="relative px-6 py-20 md:px-12 md:py-32">
@@ -455,10 +471,72 @@ export function Stories() {
             </article>
           ))}
         </div>
+
+        {/* Themes of the archive */}
+        <div className="mt-32">
+          <div className="mb-12 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              Themes of the archive
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory">
+              The recurring shapes of solidarity
+            </h2>
+          </div>
+          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-2">
+            {STORY_THEMES.map((t) => (
+              <div key={t.k} className="bg-space-black p-8">
+                <dt className="text-[10px] uppercase tracking-[0.3em] text-gold-dust">{t.k}</dt>
+                <dd className="mt-4 text-sm leading-relaxed text-ivory/60">{t.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {/* Additional fragments */}
+        <div className="mt-32">
+          <div className="mb-12 text-center">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+              From the field
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-light text-ivory">
+              Six fragments, six geographies
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-2 lg:grid-cols-3">
+            {STORY_FRAGMENTS.map((s) => (
+              <article key={s.title} className="bg-space-black p-8">
+                <span className={`text-[9px] uppercase tracking-[0.3em] ${s.accent}`}>{s.place}</span>
+                <h3 className="mt-4 font-display text-lg font-light text-ivory">{s.title}</h3>
+                <p className="mt-4 text-xs leading-relaxed text-ivory/55">{s.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        {/* Submit prompt */}
+        <div className="mt-32 rounded-2xl border border-ivory/10 bg-space-deep p-12 text-center md:p-16">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+            Add to the archive
+          </span>
+          <h2 className="mx-auto mt-5 max-w-2xl font-display text-3xl font-light text-ivory md:text-4xl">
+            Every quiet gesture deserves a witness
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ivory/55">
+            If you have seen, received, or carried a story of solidarity, the archive is open.
+            Anonymity is honored. Specificity is welcomed.
+          </p>
+          <Link
+            to="/offer"
+            className="mt-10 inline-block rounded-full border border-ivory/20 px-10 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-ivory transition-all hover:border-gold-dust hover:text-gold-dust"
+          >
+            Share a story →
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
+
 
 export function EarthPulse() {
   return (
