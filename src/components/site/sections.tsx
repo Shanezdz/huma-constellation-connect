@@ -178,6 +178,40 @@ export function GlobalConstellation() {
   );
 }
 
+const OFFER_CATEGORIES = [
+  {
+    n: "I",
+    title: "Mentorship",
+    body: "Guide a younger maker, a displaced student, a self-taught learner. One conversation a month can redirect a life.",
+    examples: ["Career listening", "Code reviews", "Artistic critique", "Founder counsel"],
+  },
+  {
+    n: "II",
+    title: "Knowledge",
+    body: "Translate what you know into a transferable gesture — a lesson, a workshop, a written piece, a recorded voice.",
+    examples: ["Open lectures", "Field manuals", "Language tutoring", "Research notes"],
+  },
+  {
+    n: "III",
+    title: "Translation",
+    body: "Bridge a sentence across a border. Subtitles, documents, oral interpretation — language is infrastructure.",
+    examples: ["Document review", "Live interpretation", "Subtitling", "Cultural mediation"],
+  },
+  {
+    n: "IV",
+    title: "Time",
+    body: "The rarest offering. An hour of presence, of listening, of patient company. The atomic unit of solidarity.",
+    examples: ["Companionship calls", "Local presence", "Quiet listening", "Skill-shadowing"],
+  },
+];
+
+const OFFER_PRINCIPLES = [
+  { k: "Reciprocity", v: "Every offer is also an opening to receive. The map remembers what you give and what you accept." },
+  { k: "Specificity", v: "Vague help dissolves. Name the gesture: an hour, a skill, a place, a frequency." },
+  { k: "Continuity", v: "A small recurring contribution outweighs a single grand one. The constellation is fed by rhythm." },
+  { k: "Anonymity", v: "Visibility is optional. The map values the gesture, not the signature." },
+];
+
 export function OfferHumanity() {
   return (
     <section className="relative px-6 py-20 md:px-12 md:py-32">
@@ -222,9 +256,71 @@ export function OfferHumanity() {
           </button>
         </form>
       </div>
+
+      <div className="mx-auto mt-32 max-w-6xl">
+        <div className="mb-16 text-center">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+            Four territories of offering
+          </span>
+          <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+            Choose the gesture that already lives in you
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-2">
+          {OFFER_CATEGORIES.map((c) => (
+            <div key={c.n} className="bg-space-black p-10">
+              <div className="font-display text-xs tracking-[0.4em] text-gold-dust">{c.n}</div>
+              <h3 className="mt-6 font-display text-2xl font-light text-ivory">{c.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-ivory/55">{c.body}</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {c.examples.map((e) => (
+                  <span
+                    key={e}
+                    className="rounded-full border border-ivory/10 px-3 py-1 text-[9px] uppercase tracking-[0.25em] text-ivory/50"
+                  >
+                    {e}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mx-auto mt-32 max-w-4xl">
+        <div className="mb-14 text-center">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+            Principles of the offering
+          </span>
+          <h2 className="mt-5 font-display text-3xl font-light text-ivory">
+            A quiet ethics, not a transaction
+          </h2>
+        </div>
+        <dl className="divide-y divide-ivory/10 border-y border-ivory/10">
+          {OFFER_PRINCIPLES.map((p) => (
+            <div key={p.k} className="grid grid-cols-1 gap-4 py-8 md:grid-cols-[200px_1fr] md:gap-12">
+              <dt className="text-[10px] uppercase tracking-[0.3em] text-gold-dust">{p.k}</dt>
+              <dd className="text-sm leading-relaxed text-ivory/60">{p.v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </section>
   );
 }
+
+const ECHO_STAGES = [
+  { n: "01", title: "The gesture", body: "A single act of attention — five minutes of listening, a translated sentence, a door held open." },
+  { n: "02", title: "The trace", body: "Memory imprints. The person who received the gesture carries a quieter pulse forward into the next encounter." },
+  { n: "03", title: "The relay", body: "Within hours or years, the trace is offered again — same shape, new constellation. The original sender is invisible." },
+  { n: "04", title: "The field", body: "A culture of low-frequency reciprocity emerges. Solidarity stops being a value and becomes a climate." },
+];
+
+const ECHO_QUOTES = [
+  { q: "I was helped once, twenty-three years ago, by a stranger at a train station. I have been answering that gesture ever since.", a: "— Anonymous, Marseille" },
+  { q: "The teacher who taught me to read died before I could thank her. So I taught my neighbours' children. That is the only thanks that travels.", a: "— Anonymous, Dakar" },
+  { q: "Solidarity is not a feeling. It is a frequency you tune the rest of your life to.", a: "— HUMA field note" },
+];
 
 export function HumanEcho() {
   return (
@@ -268,9 +364,63 @@ export function HumanEcho() {
           ))}
         </div>
       </div>
+
+      <div className="mx-auto mt-32 max-w-6xl">
+        <div className="mb-16 text-center">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">The propagation</span>
+          <h2 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
+            Four stages of the echo
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 md:grid-cols-4">
+          {ECHO_STAGES.map((s) => (
+            <div key={s.n} className="bg-space-black p-8">
+              <div className="font-display text-xs tracking-[0.4em] text-gold-dust">{s.n}</div>
+              <h3 className="mt-6 font-display text-xl font-light text-ivory">{s.title}</h3>
+              <p className="mt-4 text-xs leading-relaxed text-ivory/55">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mx-auto mt-32 max-w-5xl">
+        <div className="grid grid-cols-1 gap-12 text-center md:grid-cols-3">
+          {[
+            { v: "× 7.4", l: "Average relays per gesture", t: "text-celestial" },
+            { v: "23 yrs", l: "Longest documented arc", t: "text-gold-dust" },
+            { v: "61%", l: "Echoes crossing a border", t: "text-aurora" },
+          ].map((m) => (
+            <div key={m.l}>
+              <div className={`font-display text-4xl font-light md:text-5xl ${m.t}`}>{m.v}</div>
+              <div className="mt-3 text-[9px] uppercase tracking-[0.3em] text-ivory/40">{m.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mx-auto mt-32 max-w-4xl">
+        <div className="mb-14 text-center">
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
+            Voices from the field
+          </span>
+        </div>
+        <div className="space-y-12">
+          {ECHO_QUOTES.map((e, i) => (
+            <figure key={i} className="border-l border-gold-dust/40 pl-8">
+              <blockquote className="font-display text-xl font-light leading-relaxed text-ivory md:text-2xl">
+                “{e.q}”
+              </blockquote>
+              <figcaption className="mt-4 text-[10px] uppercase tracking-[0.3em] text-ivory/50">
+                {e.a}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
+
 
 export function Stories() {
   return (
