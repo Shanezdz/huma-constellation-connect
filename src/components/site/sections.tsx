@@ -22,6 +22,17 @@ export const STORIES = [
     title: "The Master & The Apprentice",
     body: "A retired calligrapher is teaching digital typography to four hundred students across Brazil through the HUMA protocol.",
     img: storyHands,
+    chapters: [
+      "Hiroshi Tanaka spent fifty-two years perfecting the gesture of a single brushstroke. When his hands began to tremble, he assumed his teaching life was over. A São Paulo design student wrote to him about the spacing of Japanese letterforms in a poster she could not finish.",
+      "He answered in three pages of handwritten notes, scanned by his granddaughter and translated by a stranger in Porto. The reply moved through screens for a week before reaching her. She made the poster. She sent it back.",
+      "Two years later, Hiroshi mentors a quiet cohort of four hundred — type designers, sign painters, tattoo artists, schoolchildren — across nineteen Brazilian cities. He teaches in voice notes recorded at dawn. They send him photographs of streets he will never walk.",
+    ],
+    quote: "I lost my hands. I did not lose what my hands knew.",
+    impact: [
+      { v: "400", l: "Students across 19 cities" },
+      { v: "52", l: "Years of practice transmitted" },
+      { v: "0 ¥", l: "Cost to either side" },
+    ],
   },
   {
     place: "Nairobi, Kenya",
@@ -29,6 +40,17 @@ export const STORIES = [
     title: "The Water Weaver",
     body: "One local solution for atmospheric water harvesting, shared with community leaders in twelve arid regions worldwide.",
     img: storyLandscape,
+    chapters: [
+      "Akinyi Otieno is an agricultural engineer who, with three neighbours and a stack of welded mesh, built a fog-harvesting array on a hill above her village. It produced sixty liters of drinkable water on its first morning.",
+      "She filmed the assembly on a borrowed phone and uploaded a twenty-three minute tutorial. No music, no editing, no English subtitles — only her voice in Dholuo, naming each angle and weld.",
+      "Twelve communities — in Atacama, Sahel, Rajasthan, central Mexico — have since built their own variation. None of them have met her. Each array is slightly different. Each one carries her geometry.",
+    ],
+    quote: "The mesh is mine. The water belongs to whoever needs it.",
+    impact: [
+      { v: "12", l: "Arid regions replicating" },
+      { v: "60 L", l: "Per array, per dawn" },
+      { v: "23 min", l: "Open-source tutorial" },
+    ],
   },
   {
     place: "Reykjavík, Iceland",
@@ -36,8 +58,20 @@ export const STORIES = [
     title: "The Listening Project",
     body: "Anonymous psychological support networks bridging generations of isolated individuals through the winter months.",
     img: storyCircle,
+    chapters: [
+      "In the long Icelandic winter, a small collective of off-duty nurses, fishermen and grandmothers began answering an unlisted phone line for anyone who could not bear the dark alone. No diagnoses. No advice. Only listening.",
+      "Within two seasons the network grew to one hundred and eighty voices across the country, then jumped — through a single emigrated daughter — to Murmansk, Tromsø, Nuuk, and finally to a winter shelter in Ushuaia at the other end of the planet.",
+      "The protocol is one page long. Pick up before the third ring. Do not ask the caller's name. Stay until they hang up. Never call them back. Tell no one what was said.",
+    ],
+    quote: "The cure for the long night was not light. It was someone breathing on the other end.",
+    impact: [
+      { v: "180", l: "Volunteer listeners" },
+      { v: "6", l: "Sub-arctic cities linked" },
+      { v: "1 pg", l: "Entire protocol" },
+    ],
   },
 ];
+
 
 export const PULSE_METRICS = [
   { value: "842,019", label: "Active solidarity flows", tone: "text-celestial" },
