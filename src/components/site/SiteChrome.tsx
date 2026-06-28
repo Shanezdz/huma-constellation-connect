@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { applyLanguage } from "@/lib/translate-runtime";
 
 const LANGS = [
   { code: "en", label: "English", short: "EN", dir: "ltr" },
@@ -12,20 +13,36 @@ type LangCode = (typeof LANGS)[number]["code"];
 function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const [lang, setLang] = useState<LangCode>("en");
+  const [loading, setLoading] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     const saved = (typeof window !== "undefined" && localStorage.getItem("huma-lang")) as LangCode | null;
     if (saved && LANGS.some((l) => l.code === saved)) setLang(saved);
   }, []);
 
+  // Apply language to document + translate DOM whenever lang OR route changes
   useEffect(() => {
     const entry = LANGS.find((l) => l.code === lang);
     if (!entry) return;
     document.documentElement.lang = entry.code;
     document.documentElement.dir = entry.dir;
     localStorage.setItem("huma-lang", entry.code);
-  }, [lang]);
+
+    let cancelled = false;
+    setLoading(true);
+    // Wait a frame so the new route DOM is mounted
+    const t = setTimeout(() => {
+      applyLanguage(lang).finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    }, 50);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+  }, [lang, pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -39,7 +56,7 @@ function LanguageSwitcher() {
   const current = LANGS.find((l) => l.code === lang) ?? LANGS[0];
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative" data-no-translate>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -48,7 +65,16 @@ function LanguageSwitcher() {
         aria-expanded={open}
         className="flex items-center gap-2 rounded-full border border-ivory/15 px-3 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory/80 transition-all duration-300 hover:border-ivory/40 hover:text-ivory"
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          aria-hidden="true"
+          className={loading ? "animate-spin" : ""}
+        >
           <circle cx="12" cy="12" r="9" />
           <ellipse cx="12" cy="12" rx="4" ry="9" />
           <path d="M3 12h18" />
