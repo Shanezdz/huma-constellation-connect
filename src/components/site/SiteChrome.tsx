@@ -112,12 +112,15 @@ export function Nav() {
           </Link>
         ))}
       </div>
-      <Link
-        to="/offer"
-        className="rounded-full border border-ivory/15 px-5 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory transition-all duration-500 hover:bg-ivory hover:text-space-black"
-      >
-        Connect
-      </Link>
+      <div className="flex items-center gap-3">
+        <LanguageSwitcher />
+        <Link
+          to="/offer"
+          className="rounded-full border border-ivory/15 px-5 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory transition-all duration-500 hover:bg-ivory hover:text-space-black"
+        >
+          Connect
+        </Link>
+      </div>
     </nav>
   );
 }
