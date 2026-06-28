@@ -20,13 +20,11 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://huma-constellation-connect.lovable.app/" },
       {
         property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/84f6d042-7d50-4030-b5d9-a2076253bd5a/id-preview-1ce4494c--8dab1ca6-5b82-4c36-a5e5-4107b90614de.lovable.app-1779739208580.png",
+        content: "https://huma-constellation-connect.lovable.app/og/og-home.jpg",
       },
       {
         name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/84f6d042-7d50-4030-b5d9-a2076253bd5a/id-preview-1ce4494c--8dab1ca6-5b82-4c36-a5e5-4107b90614de.lovable.app-1779739208580.png",
+        content: "https://huma-constellation-connect.lovable.app/og/og-home.jpg",
       },
     ],
     links: [{ rel: "canonical", href: "https://huma-constellation-connect.lovable.app/" }],
