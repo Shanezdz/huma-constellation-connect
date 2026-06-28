@@ -22,6 +22,17 @@ export const STORIES = [
     title: "The Master & The Apprentice",
     body: "A retired calligrapher is teaching digital typography to four hundred students across Brazil through the HUMA protocol.",
     img: storyHands,
+    chapters: [
+      "Hiroshi Tanaka spent fifty-two years perfecting the gesture of a single brushstroke. When his hands began to tremble, he assumed his teaching life was over. A São Paulo design student wrote to him about the spacing of Japanese letterforms in a poster she could not finish.",
+      "He answered in three pages of handwritten notes, scanned by his granddaughter and translated by a stranger in Porto. The reply moved through screens for a week before reaching her. She made the poster. She sent it back.",
+      "Two years later, Hiroshi mentors a quiet cohort of four hundred — type designers, sign painters, tattoo artists, schoolchildren — across nineteen Brazilian cities. He teaches in voice notes recorded at dawn. They send him photographs of streets he will never walk.",
+    ],
+    quote: "I lost my hands. I did not lose what my hands knew.",
+    impact: [
+      { v: "400", l: "Students across 19 cities" },
+      { v: "52", l: "Years of practice transmitted" },
+      { v: "0 ¥", l: "Cost to either side" },
+    ],
   },
   {
     place: "Nairobi, Kenya",
@@ -29,6 +40,17 @@ export const STORIES = [
     title: "The Water Weaver",
     body: "One local solution for atmospheric water harvesting, shared with community leaders in twelve arid regions worldwide.",
     img: storyLandscape,
+    chapters: [
+      "Akinyi Otieno is an agricultural engineer who, with three neighbours and a stack of welded mesh, built a fog-harvesting array on a hill above her village. It produced sixty liters of drinkable water on its first morning.",
+      "She filmed the assembly on a borrowed phone and uploaded a twenty-three minute tutorial. No music, no editing, no English subtitles — only her voice in Dholuo, naming each angle and weld.",
+      "Twelve communities — in Atacama, Sahel, Rajasthan, central Mexico — have since built their own variation. None of them have met her. Each array is slightly different. Each one carries her geometry.",
+    ],
+    quote: "The mesh is mine. The water belongs to whoever needs it.",
+    impact: [
+      { v: "12", l: "Arid regions replicating" },
+      { v: "60 L", l: "Per array, per dawn" },
+      { v: "23 min", l: "Open-source tutorial" },
+    ],
   },
   {
     place: "Reykjavík, Iceland",
@@ -36,8 +58,20 @@ export const STORIES = [
     title: "The Listening Project",
     body: "Anonymous psychological support networks bridging generations of isolated individuals through the winter months.",
     img: storyCircle,
+    chapters: [
+      "In the long Icelandic winter, a small collective of off-duty nurses, fishermen and grandmothers began answering an unlisted phone line for anyone who could not bear the dark alone. No diagnoses. No advice. Only listening.",
+      "Within two seasons the network grew to one hundred and eighty voices across the country, then jumped — through a single emigrated daughter — to Murmansk, Tromsø, Nuuk, and finally to a winter shelter in Ushuaia at the other end of the planet.",
+      "The protocol is one page long. Pick up before the third ring. Do not ask the caller's name. Stay until they hang up. Never call them back. Tell no one what was said.",
+    ],
+    quote: "The cure for the long night was not light. It was someone breathing on the other end.",
+    impact: [
+      { v: "180", l: "Volunteer listeners" },
+      { v: "6", l: "Sub-arctic cities linked" },
+      { v: "1 pg", l: "Entire protocol" },
+    ],
   },
 ];
+
 
 export const PULSE_METRICS = [
   { value: "842,019", label: "Active solidarity flows", tone: "text-celestial" },
@@ -450,27 +484,59 @@ export function Stories() {
           align="center"
         />
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+        <div className="space-y-32">
           {STORIES.map((s, i) => (
-            <article key={s.title} className={`group cursor-pointer ${i === 1 ? "md:mt-16" : ""}`}>
-              <div className="mb-6 aspect-[3/4] overflow-hidden border border-ivory/10 bg-space-deep">
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  loading="lazy"
-                  width={800}
-                  height={1066}
-                  className="h-full w-full object-cover grayscale transition-all duration-1000 group-hover:scale-105 group-hover:grayscale-0"
-                />
+            <article key={s.title} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+              <div className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                <div className="overflow-hidden border border-ivory/10 bg-space-deep">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    loading="lazy"
+                    width={800}
+                    height={1066}
+                    className="aspect-[3/4] h-full w-full object-cover grayscale transition-all duration-1000 hover:grayscale-0"
+                  />
+                </div>
+                <div className="mt-8 grid grid-cols-3 gap-4 border-t border-ivory/10 pt-6">
+                  {s.impact.map((m) => (
+                    <div key={m.l}>
+                      <div className={`font-display text-xl font-light ${s.accent}`}>{m.v}</div>
+                      <div className="mt-2 text-[9px] uppercase leading-tight tracking-[0.25em] text-ivory/40">
+                        {m.l}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <span className={`text-[9px] uppercase tracking-[0.3em] ${s.accent}`}>{s.place}</span>
-              <h2 className="mt-3 font-display text-xl font-light text-ivory transition-transform duration-500 group-hover:translate-x-2">
-                {s.title}
-              </h2>
-              <p className="mt-4 text-xs leading-relaxed text-ivory/50">{s.body}</p>
+
+              <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                <span className={`text-[10px] uppercase tracking-[0.4em] ${s.accent}`}>
+                  {s.place}
+                </span>
+                <h2 className="mt-4 font-display text-3xl font-light text-ivory md:text-4xl">
+                  {s.title}
+                </h2>
+                <p className="mt-6 font-display text-lg font-light italic leading-relaxed text-ivory/80">
+                  {s.body}
+                </p>
+                <div className="mt-10 space-y-6 text-sm leading-relaxed text-ivory/60">
+                  {s.chapters.map((c, ci) => (
+                    <p key={ci} className="first-letter:font-display first-letter:text-2xl first-letter:text-gold-dust">
+                      {c}
+                    </p>
+                  ))}
+                </div>
+                <figure className="mt-10 border-l border-gold-dust/40 pl-6">
+                  <blockquote className="font-display text-xl font-light leading-relaxed text-ivory">
+                    “{s.quote}”
+                  </blockquote>
+                </figure>
+              </div>
             </article>
           ))}
         </div>
+
 
         {/* Themes of the archive */}
         <div className="mt-32">
