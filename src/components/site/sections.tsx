@@ -925,7 +925,7 @@ export function FutureHumanity() {
                   className={`relative grid grid-cols-1 gap-8 md:grid-cols-2 ${idx % 2 === 1 ? "md:text-right" : ""}`}
                 >
                   <div className={`md:px-12 ${idx % 2 === 1 ? "md:col-start-2" : ""}`}>
-                    <div className="font-display text-4xl font-light md:text-5xl ${h.tone}">{h.year}</div>
+                  <div className={`font-display text-4xl font-light md:text-5xl ${h.tone}`}>{h.year}</div>
                     <h3 className="mt-3 font-display text-xl font-light text-ivory">{h.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-ivory/50">{h.body}</p>
                   </div>
