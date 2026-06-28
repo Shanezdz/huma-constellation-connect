@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { generateText } from "ai";
+import { getRequestHeader } from "@tanstack/react-start/server";
 
 type Input = { texts: string[]; target: "fr" | "ar" };
 
@@ -9,16 +10,40 @@ const LANG_LABEL: Record<Input["target"], string> = {
   ar: "Arabic (Modern Standard, RTL)",
 };
 
+const MAX_TEXTS = 400;
+const MAX_TEXT_LEN = 500;
+const MAX_TOTAL_CHARS = 20_000;
+
 export const translateBatch = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => {
     const d = data as Input;
     if (!d || !Array.isArray(d.texts)) throw new Error("Invalid input");
     if (d.target !== "fr" && d.target !== "ar") throw new Error("Invalid target");
-    // Cap to prevent abuse
-    if (d.texts.length > 400) throw new Error("Too many texts");
-    return { texts: d.texts.map((s) => String(s)), target: d.target };
+    if (d.texts.length > MAX_TEXTS) throw new Error("Too many texts");
+    const texts = d.texts.map((s) => String(s));
+    let total = 0;
+    for (const s of texts) {
+      if (s.length > MAX_TEXT_LEN) throw new Error("Text too long");
+      total += s.length;
+      if (total > MAX_TOTAL_CHARS) throw new Error("Payload too large");
+    }
+    return { texts, target: d.target };
   })
   .handler(async ({ data }) => {
+    // Same-origin guard: this endpoint exists only to serve our own UI.
+    const origin = getRequestHeader("origin") ?? "";
+    const referer = getRequestHeader("referer") ?? "";
+    const host = getRequestHeader("host") ?? "";
+    const source = origin || referer;
+    if (!source) throw new Error("Forbidden origin");
+    try {
+      const u = new URL(source);
+      if (host && u.host !== host) throw new Error("Forbidden origin");
+    } catch (e) {
+      if ((e as Error).message === "Forbidden origin") throw e;
+      throw new Error("Forbidden origin");
+    }
+
     const key = process.env.LOVABLE_API_KEY;
     if (!key) throw new Error("Missing LOVABLE_API_KEY");
 
