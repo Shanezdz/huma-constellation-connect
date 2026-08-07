@@ -37,7 +37,7 @@ export const CONTRIBUTION_MODES: {
     categories: [
       { label: "Guidance", hint: "Someone who has done this before" },
       { label: "Learning", hint: "A skill, a language, a certification" },
-      { label: "Translation", hint: "A document, a conversation, a form" },
+      { label: "Care", hint: "Support through a hard passage, wellbeing" },
       { label: "Presence", hint: "Company, listening, a regular call" },
       { label: "Expertise", hint: "A professional opinion or review" },
       { label: "Practical support", hint: "Tools, space, logistics, access" },
