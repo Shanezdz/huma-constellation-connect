@@ -14,6 +14,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PulseRouteImport } from './routes/pulse'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OfferRouteImport } from './routes/offer'
+import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as FutureRouteImport } from './routes/future'
 import { Route as EchoRouteImport } from './routes/echo'
@@ -44,6 +45,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const OfferRoute = OfferRouteImport.update({
   id: '/offer',
   path: '/offer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/echo': typeof EchoRoute
   '/future': typeof FutureRoute
   '/legal': typeof LegalRoute
+  '/methodology': typeof MethodologyRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/echo': typeof EchoRoute
   '/future': typeof FutureRoute
   '/legal': typeof LegalRoute
+  '/methodology': typeof MethodologyRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/echo': typeof EchoRoute
   '/future': typeof FutureRoute
   '/legal': typeof LegalRoute
+  '/methodology': typeof MethodologyRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/echo'
     | '/future'
     | '/legal'
+    | '/methodology'
     | '/offer'
     | '/privacy'
     | '/pulse'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/echo'
     | '/future'
     | '/legal'
+    | '/methodology'
     | '/offer'
     | '/privacy'
     | '/pulse'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/echo'
     | '/future'
     | '/legal'
+    | '/methodology'
     | '/offer'
     | '/privacy'
     | '/pulse'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   EchoRoute: typeof EchoRoute
   FutureRoute: typeof FutureRoute
   LegalRoute: typeof LegalRoute
+  MethodologyRoute: typeof MethodologyRoute
   OfferRoute: typeof OfferRoute
   PrivacyRoute: typeof PrivacyRoute
   PulseRoute: typeof PulseRoute
@@ -208,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/offer'
       fullPath: '/offer'
       preLoaderRoute: typeof OfferRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   EchoRoute: EchoRoute,
   FutureRoute: FutureRoute,
   LegalRoute: LegalRoute,
+  MethodologyRoute: MethodologyRoute,
   OfferRoute: OfferRoute,
   PrivacyRoute: PrivacyRoute,
   PulseRoute: PulseRoute,
