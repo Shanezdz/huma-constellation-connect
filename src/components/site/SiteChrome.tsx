@@ -263,7 +263,7 @@ function MobileMenu() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-space-black/98 px-6 pb-16 pt-6 backdrop-blur-xl">
+        <div className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-space-black px-6 pb-16 pt-6">
           <nav aria-label="Mobile">
             {NAV_GROUPS.map((g) => (
               <section key={g.id} className="border-t border-ivory/10 py-6 first:border-t-0 first:pt-0">
