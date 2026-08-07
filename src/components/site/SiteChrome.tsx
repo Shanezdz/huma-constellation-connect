@@ -304,7 +304,7 @@ function MobileMenu() {
 
 export function Nav() {
   return (
-    <nav className="fixed top-0 z-[61] flex w-full items-center justify-between gap-4 bg-space-black/90 px-6 py-6 md:px-12">
+    <nav className="fixed top-0 z-[61] flex w-full items-center justify-between gap-4 bg-space-black/70 px-6 py-6 backdrop-blur-xl md:px-12">
       <Link to="/" className="shrink-0 font-display text-sm font-light tracking-[0.4em] text-ivory">
         HUMA
       </Link>
