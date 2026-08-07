@@ -279,18 +279,24 @@ export function GlobalConstellation() {
             <div className="flex items-center gap-3 rounded-full border border-ivory/10 bg-black/40 px-4 py-2 backdrop-blur-xl">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-aurora shadow-[0_0_10px_currentColor]" />
               <span className="text-[10px] uppercase tracking-[0.25em] text-ivory">
-                14,202 active initiatives
+                14,202 initiatives
               </span>
             </div>
             <div className="flex items-center gap-3 rounded-full border border-ivory/10 bg-black/40 px-4 py-2 backdrop-blur-xl">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-celestial shadow-[0_0_10px_currentColor]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-celestial" />
               <span className="text-[10px] uppercase tracking-[0.25em] text-ivory">
-                Live data feed
+                Prototype feed — not live data
               </span>
             </div>
           </div>
         </div>
+
+        <DataDisclosure status="prototype" className="mt-8">
+          The nodes and counters on this map are prototype content. No live feed of real solidarity
+          activity is connected yet.
+        </DataDisclosure>
       </div>
+
     </section>
   );
 }
