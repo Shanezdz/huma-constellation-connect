@@ -400,6 +400,7 @@ export function ManifestoFooter() {
                 <li><Link to="/pulse" className="hover:text-ivory">Humanity Pulse</Link></li>
                 <li><Link to="/echo" className="hover:text-ivory">Ripple Effect</Link></li>
                 <li><Link to="/future" className="hover:text-ivory">Horizon</Link></li>
+                <li><Link to="/organisations" className="hover:text-ivory">For organisations</Link></li>
                 <li><Link to="/methodology" className="hover:text-ivory">Methodology &amp; data</Link></li>
               </ul>
             </div>
