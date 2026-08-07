@@ -128,7 +128,7 @@ export function Nav() {
       <Link to="/" className="font-display text-sm font-light tracking-[0.4em] text-ivory">
         HUMA
       </Link>
-      <div className="hidden gap-10 text-[10px] uppercase tracking-[0.25em] text-ivory/60 md:flex">
+      <div className="hidden gap-5 text-[10px] uppercase tracking-[0.2em] text-ivory/60 md:flex lg:gap-8 lg:tracking-[0.25em]">
         {NAV_LINKS.map((l) => (
           <Link
             key={l.to}
