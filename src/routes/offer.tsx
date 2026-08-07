@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteChrome";
 import { OfferHumanity } from "@/components/site/sections";
+import type { ContributionMode } from "@/components/site/Contribution";
 
 export const Route = createFileRoute("/offer")({
-  component: () => (
-    <SiteLayout>
-      <OfferHumanity />
-    </SiteLayout>
-  ),
+  validateSearch: (search: Record<string, unknown>): { mode?: ContributionMode } => {
+    const m = search["mode"];
+    return m === "need" || m === "offer" || m === "connect" ? { mode: m } : {};
+  },
+  component: OfferPage,
+
   head: () => ({
     meta: [
       { title: "Offer your contribution — HUMA" },
