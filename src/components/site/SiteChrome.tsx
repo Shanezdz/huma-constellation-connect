@@ -263,7 +263,7 @@ function MobileMenu() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-space-black px-6 pb-16 pt-6">
+        <div className="fixed inset-0 top-[72px] z-[60] overflow-y-auto bg-space-black px-6 pb-16 pt-6">
           <nav aria-label="Mobile">
             {NAV_GROUPS.map((g) => (
               <section key={g.id} className="border-t border-ivory/10 py-6 first:border-t-0 first:pt-0">
@@ -304,7 +304,7 @@ function MobileMenu() {
 
 export function Nav() {
   return (
-    <nav className="fixed top-0 z-40 flex w-full items-center justify-between gap-4 bg-space-black/70 px-6 py-6 backdrop-blur-xl md:px-12">
+    <nav className="fixed top-0 z-[61] flex w-full items-center justify-between gap-4 bg-space-black/70 px-6 py-6 backdrop-blur-xl md:px-12">
       <Link to="/" className="shrink-0 font-display text-sm font-light tracking-[0.4em] text-ivory">
         HUMA
       </Link>
