@@ -513,7 +513,12 @@ export function HumanEcho() {
             </div>
           ))}
         </div>
+        <DataDisclosure status="illustrative" className="mt-14 text-left">
+          These propagation figures are illustrative. HUMA does not currently track the real-world
+          relay of a gesture, and does not claim to measure impact.
+        </DataDisclosure>
       </div>
+
 
       <div className="mx-auto mt-32 max-w-4xl">
         <div className="mb-14 text-center">
