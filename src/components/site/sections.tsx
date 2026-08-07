@@ -227,6 +227,63 @@ export function Hero() {
   );
 }
 
+export function ValueProposition() {
+  return (
+    <section className="relative border-b border-ivory/5 px-6 py-24 md:px-12 md:py-32">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">What is HUMA?</p>
+        <h2 className="mt-6 font-display text-2xl font-light leading-snug text-ivory md:text-4xl">
+          Humanity already contains an immense invisible infrastructure of knowledge, time and
+          mutual aid. HUMA maps it.
+        </h2>
+        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 sm:grid-cols-3">
+          {[
+            { k: "Offer", v: "Offer what you can." },
+            { k: "Ask", v: "Ask for what you need." },
+            { k: "Connect", v: "Connect across borders." },
+          ].map((i) => (
+            <div key={i.k} className="bg-space-black px-6 py-7">
+              <span className="text-[9px] uppercase tracking-[0.3em] text-gold-dust">{i.k}</span>
+              <p className="mt-3 text-sm leading-relaxed text-ivory/60">{i.v}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+          <Link
+            to="/offer"
+            className="w-full rounded-full bg-ivory px-9 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-space-black transition-transform hover:scale-[1.03] sm:w-auto"
+          >
+            Offer something
+          </Link>
+          <Link
+            to="/offer"
+            search={{ mode: "need" }}
+            className="w-full rounded-full border border-ivory/25 px-9 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-ivory transition-colors hover:border-gold-dust hover:text-gold-dust sm:w-auto"
+          >
+            Ask for something
+          </Link>
+          <Link
+            to="/constellation"
+            className="w-full px-4 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-ivory/50 transition-colors hover:text-ivory sm:w-auto"
+          >
+            Explore the constellation →
+          </Link>
+        </div>
+
+        <Link
+          to="/about"
+          className="mt-10 inline-block text-[10px] uppercase tracking-[0.3em] text-ivory/35 transition-colors hover:text-gold-dust"
+        >
+          A civic infrastructure for human solidarity — read more
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+
+
 export function SectionHeader({
   number,
   kicker,
