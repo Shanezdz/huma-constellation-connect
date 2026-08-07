@@ -216,7 +216,14 @@ function AboutPage() {
             to see where capacity already exists in a territory before designing a programme around
             it. Both read the same public constellation.
           </p>
+          <Link
+            to="/organisations"
+            className="mt-8 inline-block text-[10px] uppercase tracking-[0.3em] text-ivory/40 transition-colors hover:text-gold-dust"
+          >
+            For organisations →
+          </Link>
         </section>
+
 
         <section className="mt-24 rounded-2xl border border-ivory/10 bg-space-deep p-10 text-center md:p-16">
           <p className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">The vision</p>
