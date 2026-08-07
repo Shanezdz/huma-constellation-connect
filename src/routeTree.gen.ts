@@ -13,6 +13,7 @@ import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PulseRouteImport } from './routes/pulse'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as OrganisationsRouteImport } from './routes/organisations'
 import { Route as OfferRouteImport } from './routes/offer'
 import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as LegalRouteImport } from './routes/legal'
@@ -40,6 +41,11 @@ const PulseRoute = PulseRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganisationsRoute = OrganisationsRouteImport.update({
+  id: '/organisations',
+  path: '/organisations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OfferRoute = OfferRouteImport.update({
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/legal': typeof LegalRoute
   '/methodology': typeof MethodologyRoute
   '/offer': typeof OfferRoute
+  '/organisations': typeof OrganisationsRoute
   '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/legal': typeof LegalRoute
   '/methodology': typeof MethodologyRoute
   '/offer': typeof OfferRoute
+  '/organisations': typeof OrganisationsRoute
   '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/legal': typeof LegalRoute
   '/methodology': typeof MethodologyRoute
   '/offer': typeof OfferRoute
+  '/organisations': typeof OrganisationsRoute
   '/privacy': typeof PrivacyRoute
   '/pulse': typeof PulseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/methodology'
     | '/offer'
+    | '/organisations'
     | '/privacy'
     | '/pulse'
     | '/sitemap.xml'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/methodology'
     | '/offer'
+    | '/organisations'
     | '/privacy'
     | '/pulse'
     | '/sitemap.xml'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/methodology'
     | '/offer'
+    | '/organisations'
     | '/privacy'
     | '/pulse'
     | '/sitemap.xml'
@@ -180,6 +192,7 @@ export interface RootRouteChildren {
   LegalRoute: typeof LegalRoute
   MethodologyRoute: typeof MethodologyRoute
   OfferRoute: typeof OfferRoute
+  OrganisationsRoute: typeof OrganisationsRoute
   PrivacyRoute: typeof PrivacyRoute
   PulseRoute: typeof PulseRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -214,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organisations': {
+      id: '/organisations'
+      path: '/organisations'
+      fullPath: '/organisations'
+      preLoaderRoute: typeof OrganisationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/offer': {
@@ -284,6 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalRoute: LegalRoute,
   MethodologyRoute: MethodologyRoute,
   OfferRoute: OfferRoute,
+  OrganisationsRoute: OrganisationsRoute,
   PrivacyRoute: PrivacyRoute,
   PulseRoute: PulseRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -292,13 +313,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

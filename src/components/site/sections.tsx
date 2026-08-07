@@ -8,6 +8,9 @@ import storyCircle from "@/assets/story-circle.jpg";
 import { ParticleField } from "./SiteChrome";
 import { StatusBadge, DataDisclosure } from "./DataStatus";
 import { ContributionComposer, type ContributionMode } from "./Contribution";
+import { ConstellationMap } from "./ConstellationMap";
+import { ContributionCard } from "./ContributionCard";
+import { ILLUSTRATIVE_CONTRIBUTIONS } from "@/lib/contributions";
 
 
 const SUBTITLES = [
@@ -315,6 +318,8 @@ export function SectionHeader({
 }
 
 export function GlobalConstellation() {
+  const offers = ILLUSTRATIVE_CONTRIBUTIONS.filter((c) => c.kind === "offer").slice(0, 3);
+  const needs = ILLUSTRATIVE_CONTRIBUTIONS.filter((c) => c.kind === "need").slice(0, 3);
   return (
     <section className="relative px-6 py-20 md:px-12 md:py-32">
       <div className="mx-auto max-w-6xl">
@@ -322,39 +327,33 @@ export function GlobalConstellation() {
           number="01"
           kicker="Constellation"
           title="Global Constellation"
-          description="Visualize the real-time flow of mentorship, aid, and knowledge as it moves across one hundred and ninety-four territories. Every node is a person; every line is a gesture."
+          description="Every node is a gesture: something a person can offer, or something a person is looking for. Filter the map, then read what a single point carries."
         />
 
-        <div className="relative aspect-video overflow-hidden rounded-2xl border border-ivory/10 bg-space-deep">
-          <img
-            src={earthImg}
-            alt="Earth at night with luminous nodes representing human solidarity connections"
-            loading="lazy"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover opacity-90"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-space-black via-transparent to-transparent" />
-          <div className="absolute bottom-6 left-6 flex flex-wrap gap-3">
-            <div className="flex items-center gap-3 rounded-full border border-ivory/10 bg-black/40 px-4 py-2 backdrop-blur-xl">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-aurora shadow-[0_0_10px_currentColor]" />
-              <span className="text-[10px] uppercase tracking-[0.25em] text-ivory">
-                14,202 initiatives
-              </span>
-            </div>
-            <div className="flex items-center gap-3 rounded-full border border-ivory/10 bg-black/40 px-4 py-2 backdrop-blur-xl">
-              <span className="h-1.5 w-1.5 rounded-full bg-celestial" />
-              <span className="text-[10px] uppercase tracking-[0.25em] text-ivory">
-                Prototype feed — not live data
-              </span>
-            </div>
-          </div>
-        </div>
+        <ConstellationMap />
 
-        <DataDisclosure status="prototype" className="mt-8">
-          The nodes and counters on this map are prototype content. No live feed of real solidarity
-          activity is connected yet.
+        <DataDisclosure status="illustrative" className="mt-8">
+          The nodes on this map are illustrative records written to show the structure of the
+          constellation. No live feed of real solidarity activity is connected yet.
         </DataDisclosure>
+
+        <div className="mt-24">
+          <div className="mb-10 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 sm:flex sm:justify-between">
+            <h2 className="min-w-0 font-display text-2xl font-light text-ivory">
+              What circulates, without who
+            </h2>
+            <StatusBadge status="illustrative" className="shrink-0" />
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {[...offers, ...needs].map((c) => (
+              <ContributionCard key={c.ref} item={c} compact />
+            ))}
+          </div>
+          <p className="mt-6 max-w-2xl text-xs leading-relaxed text-ivory/35">
+            Cards carry no name, no avatar, no popularity metric and no contact channel. HUMA shows
+            the gesture, never the profile.
+          </p>
+        </div>
       </div>
 
     </section>
@@ -402,6 +401,9 @@ export function OfferHumanity({ mode = "offer" }: { mode?: ContributionMode }) {
         <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
           Section 02 — Offer · Need · Connect
         </span>
+        <h1 className="mt-5 font-display text-4xl font-light text-ivory md:text-5xl">
+          Offer something, or ask for something
+        </h1>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-ivory/50">
           HUMA is a repository of intent — in both directions. Declare what you can give, or what
           you are looking for. Both are nodes on the same map.
