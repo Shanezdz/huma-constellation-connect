@@ -111,6 +111,39 @@ function LanguageSwitcher() {
   );
 }
 
+/** Three axes instead of seven flat destinations. */
+export const NAV_GROUPS = [
+  {
+    id: "explore",
+    label: "Explore",
+    items: [
+      { to: "/constellation", label: "The Globe", hint: "Offers and needs on the map" },
+      { to: "/stories", label: "Stories", hint: "Long-form narratives" },
+      { to: "/pulse", label: "Pulse", hint: "The collective frequency" },
+    ],
+  },
+  {
+    id: "contribute",
+    label: "Contribute",
+    items: [
+      { to: "/offer", label: "Offer something", hint: "Declare what you can give" },
+      { to: "/offer", label: "Ask for something", hint: "Declare what you need", need: true },
+    ],
+  },
+  {
+    id: "understand",
+    label: "Understand",
+    items: [
+      { to: "/about", label: "What is HUMA?", hint: "The idea, plainly" },
+      { to: "/methodology", label: "Methodology & data", hint: "Where numbers come from" },
+      { to: "/echo", label: "Echo", hint: "How a gesture propagates" },
+      { to: "/future", label: "Future", hint: "Where this could lead" },
+      { to: "/organisations", label: "For organisations", hint: "Institutional uses" },
+    ],
+  },
+] as const;
+
+/** Flat list kept for sitemap-like consumers. */
 export const NAV_LINKS = [
   { to: "/about", label: "What is HUMA?" },
   { to: "/constellation", label: "The Globe" },
@@ -119,35 +152,176 @@ export const NAV_LINKS = [
   { to: "/stories", label: "Stories" },
   { to: "/pulse", label: "Pulse" },
   { to: "/future", label: "Future" },
+  { to: "/organisations", label: "For organisations" },
 ] as const;
 
+type NavItem = { to: string; label: string; hint: string; need?: boolean };
+
+function itemProps(item: NavItem) {
+  return item.need
+    ? ({ to: "/offer", search: { mode: "need" as const } } as const)
+    : ({ to: item.to } as const);
+}
+
+function DesktopGroup({ group }: { group: (typeof NAV_GROUPS)[number] }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className={`transition-colors hover:text-ivory ${open ? "text-ivory" : ""}`}
+      >
+        {group.label}
+      </button>
+      {open && (
+        <div className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-4">
+          <ul className="overflow-hidden rounded-2xl border border-ivory/10 bg-space-black/95 py-2 backdrop-blur-xl">
+            {group.items.map((item) => (
+              <li key={item.label}>
+                <Link
+                  {...itemProps(item as NavItem)}
+                  onClick={() => setOpen(false)}
+                  className="block px-5 py-3 transition-colors hover:bg-ivory/5"
+                >
+                  <span className="block text-[10px] uppercase tracking-[0.25em] text-ivory">
+                    {item.label}
+                  </span>
+                  <span className="mt-1 block text-[10px] normal-case tracking-normal text-ivory/35">
+                    {item.hint}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MobileMenu() {
+  const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <div className="md:hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-label={open ? "Close menu" : "Open menu"}
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/15 text-ivory"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+          {open ? (
+            <>
+              <path d="M5 5l14 14" />
+              <path d="M19 5L5 19" />
+            </>
+          ) : (
+            <>
+              <path d="M3 7h18" />
+              <path d="M3 17h18" />
+            </>
+          )}
+        </svg>
+      </button>
+
+      {open && (
+        <div className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-space-black/98 px-6 pb-16 pt-6 backdrop-blur-xl">
+          <nav aria-label="Mobile">
+            {NAV_GROUPS.map((g) => (
+              <section key={g.id} className="border-t border-ivory/10 py-6 first:border-t-0 first:pt-0">
+                <p className="text-[9px] uppercase tracking-[0.4em] text-gold-dust">{g.label}</p>
+                <ul className="mt-4 space-y-1">
+                  {g.items.map((item) => (
+                    <li key={item.label}>
+                      <Link
+                        {...itemProps(item as NavItem)}
+                        className="block py-3 font-display text-xl font-light text-ivory/85"
+                      >
+                        {item.label}
+                        <span className="mt-1 block text-[10px] uppercase tracking-[0.25em] text-ivory/30">
+                          {item.hint}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </nav>
+          <Link
+            to="/offer"
+            className="mt-6 block rounded-full bg-ivory px-6 py-4 text-center font-display text-[11px] uppercase tracking-[0.3em] text-space-black"
+          >
+            Offer / Need
+          </Link>
+          <div className="mt-8 flex flex-wrap gap-5 text-[9px] uppercase tracking-[0.3em] text-ivory/30">
+            <Link to="/legal">Mentions légales</Link>
+            <Link to="/privacy">Confidentialité</Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Nav() {
   return (
-    <nav className="fixed top-0 z-40 flex w-full items-center justify-between px-6 py-6 md:px-12">
-      <Link to="/" className="font-display text-sm font-light tracking-[0.4em] text-ivory">
+    <nav className="fixed top-0 z-40 flex w-full items-center justify-between gap-4 bg-space-black/70 px-6 py-6 backdrop-blur-xl md:px-12">
+      <Link to="/" className="shrink-0 font-display text-sm font-light tracking-[0.4em] text-ivory">
         HUMA
       </Link>
-      <div className="hidden gap-5 text-[10px] uppercase tracking-[0.2em] text-ivory/60 md:flex lg:gap-8 lg:tracking-[0.25em]">
-        {NAV_LINKS.map((l) => (
-          <Link
-            key={l.to}
-            to={l.to}
-            className="transition-colors hover:text-ivory"
-            activeProps={{ className: "text-ivory" }}
-          >
-            {l.label}
-          </Link>
+      <div className="hidden gap-8 text-[10px] uppercase tracking-[0.25em] text-ivory/60 md:flex">
+        {NAV_GROUPS.map((g) => (
+          <DesktopGroup key={g.id} group={g} />
         ))}
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex shrink-0 items-center gap-3">
         <LanguageSwitcher />
         <Link
           to="/offer"
-          className="rounded-full border border-ivory/15 px-5 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory transition-all duration-500 hover:bg-ivory hover:text-space-black"
+          className="hidden rounded-full border border-ivory/15 px-5 py-2 text-[10px] uppercase tracking-[0.25em] text-ivory transition-all duration-500 hover:bg-ivory hover:text-space-black sm:inline-block"
         >
-          Connect
+          Offer / Need
         </Link>
+        <MobileMenu />
       </div>
     </nav>
   );
