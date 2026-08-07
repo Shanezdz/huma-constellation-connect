@@ -242,7 +242,6 @@ export function ManifestoFooter() {
         </div>
 
 
-        </div>
 
       </div>
     </footer>
