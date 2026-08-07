@@ -8,6 +8,9 @@ import storyCircle from "@/assets/story-circle.jpg";
 import { ParticleField } from "./SiteChrome";
 import { StatusBadge, DataDisclosure } from "./DataStatus";
 import { ContributionComposer, type ContributionMode } from "./Contribution";
+import { ConstellationMap } from "./ConstellationMap";
+import { ContributionCard } from "./ContributionCard";
+import { ILLUSTRATIVE_CONTRIBUTIONS } from "@/lib/contributions";
 
 
 const SUBTITLES = [
