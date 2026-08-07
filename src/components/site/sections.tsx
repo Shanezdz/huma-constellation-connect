@@ -657,8 +657,10 @@ export function Stories() {
                 <span className={`text-[9px] uppercase tracking-[0.3em] ${s.accent}`}>{s.place}</span>
                 <h3 className="mt-4 font-display text-lg font-light text-ivory">{s.title}</h3>
                 <p className="mt-4 text-xs leading-relaxed text-ivory/55">{s.body}</p>
+                <StatusBadge status="illustrative-scenario" className="mt-6" />
               </article>
             ))}
+
           </div>
         </div>
 
