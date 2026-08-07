@@ -38,3 +38,12 @@ export const Route = createFileRoute("/offer")({
     ],
   }),
 });
+
+function OfferPage() {
+  const { mode } = Route.useSearch();
+  return (
+    <SiteLayout>
+      <OfferHumanity mode={mode ?? "offer"} />
+    </SiteLayout>
+  );
+}
