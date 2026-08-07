@@ -3,7 +3,7 @@ import type {} from "@tanstack/react-start";
 
 const BASE_URL = "https://huma-constellation-connect.lovable.app";
 
-const paths = ["/", "/about", "/constellation", "/offer", "/echo", "/stories", "/pulse", "/future", "/methodology", "/legal", "/privacy"];
+const paths = ["/", "/about", "/constellation", "/offer", "/echo", "/stories", "/pulse", "/future", "/methodology", "/organisations", "/legal", "/privacy"];
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
