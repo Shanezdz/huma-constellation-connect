@@ -594,9 +594,13 @@ export function Stories() {
               </div>
 
               <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                <div className="mb-5">
+                  <StatusBadge status="illustrative-scenario" />
+                </div>
                 <span className={`text-[10px] uppercase tracking-[0.4em] ${s.accent}`}>
                   {s.place}
                 </span>
+
                 <h2 className="mt-4 font-display text-3xl font-light text-ivory md:text-4xl">
                   {s.title}
                 </h2>
