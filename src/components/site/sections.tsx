@@ -222,7 +222,7 @@ export function Hero() {
         </p>
         <div className="h-px w-12 bg-gold-dust/50" />
         <p className="text-[10px] uppercase tracking-[0.4em] text-gold-dust/70">
-          A living constellation of connection
+          HUMA is a poetic operating system for humanity
         </p>
       </div>
 
