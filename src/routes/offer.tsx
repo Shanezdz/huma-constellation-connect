@@ -12,13 +12,14 @@ export const Route = createFileRoute("/offer")({
 
   head: () => ({
     meta: [
-      { title: "Offer your contribution — HUMA" },
+      { title: "Offer or ask — HUMA" },
       {
         name: "description",
         content:
-          "Pulse what you carry — a skill, an hour, a quiet presence — into the planetary HUMA network.",
+          "Declare what you can offer — a skill, an hour, a quiet presence — or what you need. Both become nodes on the HUMA map.",
       },
-      { property: "og:title", content: "Offer your contribution — HUMA" },
+      { property: "og:title", content: "Offer or ask — HUMA" },
+
       {
         property: "og:description",
         content: "Add your gesture to the global constellation of human solidarity.",
