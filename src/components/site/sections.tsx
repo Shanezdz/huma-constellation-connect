@@ -734,6 +734,12 @@ export function EarthPulse() {
           ))}
         </div>
 
+        <DataDisclosure status="prototype" className="mt-16">
+          Earth Pulse is a prototype reading. These counters, regional tables and time bands are
+          not measurements of real global activity — no live data source is connected yet.
+        </DataDisclosure>
+
+
         {/* Regional pulse */}
         <div className="mt-32">
           <div className="mb-12 text-center">
