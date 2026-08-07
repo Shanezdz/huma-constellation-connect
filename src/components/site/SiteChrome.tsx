@@ -112,13 +112,15 @@ function LanguageSwitcher() {
 }
 
 export const NAV_LINKS = [
+  { to: "/about", label: "What is HUMA?" },
   { to: "/constellation", label: "The Globe" },
-  { to: "/offer", label: "Offer" },
+  { to: "/offer", label: "Offer / Need" },
   { to: "/echo", label: "Echo" },
   { to: "/stories", label: "Stories" },
   { to: "/pulse", label: "Pulse" },
   { to: "/future", label: "Future" },
 ] as const;
+
 
 export function Nav() {
   return (
