@@ -376,9 +376,9 @@ const OFFER_CATEGORIES = [
   },
   {
     n: "III",
-    title: "Translation",
-    body: "Bridge a sentence across a border. Subtitles, documents, oral interpretation — language is infrastructure.",
-    examples: ["Document review", "Live interpretation", "Subtitling", "Cultural mediation"],
+    title: "Care",
+    body: "Accompany someone through a hard passage. Attention, wellbeing, day-to-day support — care is infrastructure.",
+    examples: ["Wellbeing check-ins", "Recovery support", "Caregiver relief", "Everyday accompaniment"],
   },
   {
     n: "IV",
