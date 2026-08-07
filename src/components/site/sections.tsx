@@ -329,50 +329,23 @@ const OFFER_PRINCIPLES = [
   { k: "Anonymity", v: "Visibility is optional. The map values the gesture, not the signature." },
 ];
 
-export function OfferHumanity() {
+export function OfferHumanity({ mode = "offer" }: { mode?: ContributionMode }) {
   return (
     <section className="relative px-6 py-20 md:px-12 md:py-32">
       <div className="mx-auto max-w-2xl text-center">
         <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
-          Section 02 — Offer
+          Section 02 — Offer · Need · Connect
         </span>
-        <h1 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
-          How will you contribute?
-        </h1>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-ivory/50">
-          HUMA is a repository of intent. Whatever you carry — a skill, an hour, a quiet presence —
-          becomes a node in the global map.
+          HUMA is a repository of intent — in both directions. Declare what you can give, or what
+          you are looking for. Both are nodes on the same map.
         </p>
-
-        <form className="mt-16 space-y-10" onSubmit={(e) => e.preventDefault()}>
-          <div className="group relative">
-            <input
-              type="text"
-              placeholder="I can offer..."
-              className="w-full border-b border-ivory/15 bg-transparent py-4 text-center text-xl font-light text-ivory placeholder:text-ivory/15 focus:border-gold-dust focus:outline-none md:text-2xl"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            {["Mentorship", "Knowledge", "Translation", "Time"].map((label) => (
-              <button
-                key={label}
-                type="button"
-                className="rounded-full border border-ivory/10 px-4 py-3 text-[10px] uppercase tracking-[0.25em] text-ivory/70 transition-all hover:border-gold-dust/60 hover:text-ivory"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="submit"
-            className="mt-6 rounded-full bg-ivory px-10 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-space-black transition-transform hover:scale-[1.03]"
-          >
-            Pulse my contribution
-          </button>
-        </form>
       </div>
+
+      <div className="mt-16">
+        <ContributionComposer initialMode={mode} />
+      </div>
+
 
       <div className="mx-auto mt-32 max-w-6xl">
         <div className="mb-16 text-center">
