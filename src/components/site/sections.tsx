@@ -401,6 +401,9 @@ export function OfferHumanity({ mode = "offer" }: { mode?: ContributionMode }) {
         <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
           Section 02 — Offer · Need · Connect
         </span>
+        <h1 className="mt-5 font-display text-4xl font-light text-ivory md:text-5xl">
+          Offer something, or ask for something
+        </h1>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-ivory/50">
           HUMA is a repository of intent — in both directions. Declare what you can give, or what
           you are looking for. Both are nodes on the same map.
