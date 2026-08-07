@@ -567,6 +567,13 @@ export function Stories() {
           align="center"
         />
 
+        <DataDisclosure status="illustrative" className="mb-24">
+          Every story below is labelled. None has been independently verified, so all carry the
+          default status “Illustrative scenario” — written to convey what the network makes
+          possible, not reported as documented fact.
+        </DataDisclosure>
+
+
         <div className="space-y-32">
           {STORIES.map((s, i) => (
             <article key={s.title} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
