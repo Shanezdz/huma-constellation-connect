@@ -21,7 +21,7 @@ export const CONTRIBUTION_MODES: {
     categories: [
       { label: "Mentorship", hint: "Guidance, career listening, critique" },
       { label: "Knowledge", hint: "Lessons, workshops, field manuals" },
-      { label: "Translation", hint: "Documents, subtitles, interpretation" },
+      { label: "Care", hint: "Support, wellbeing, day-to-day accompaniment" },
       { label: "Time", hint: "Presence, listening, companionship" },
       { label: "Expertise", hint: "Legal, medical, technical, administrative" },
       { label: "Material", hint: "Tools, space, equipment, transport" },
