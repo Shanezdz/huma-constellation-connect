@@ -352,11 +352,11 @@ export function ParticleField() {
           key={i}
           className={`absolute rounded-full ${s.hue} animate-pulse-soft`}
           style={{
-            top: `${s.top}%`,
-            left: `${s.left}%`,
-            width: `${s.size}px`,
-            height: `${s.size}px`,
-            animationDelay: `${s.delay}s`,
+            top: `${s.top.toFixed(4)}%`,
+            left: `${s.left.toFixed(4)}%`,
+            width: `${s.size.toFixed(4)}px`,
+            height: `${s.size.toFixed(4)}px`,
+            animationDelay: `${s.delay.toFixed(4)}s`,
             boxShadow: "0 0 8px currentColor",
             opacity: 0.6,
           }}
