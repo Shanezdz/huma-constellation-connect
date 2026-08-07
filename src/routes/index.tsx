@@ -36,7 +36,9 @@ function Index() {
   return (
     <SiteLayout>
       <Hero />
+      <ValueProposition />
       <SectionIndex />
+
     </SiteLayout>
   );
 }
