@@ -6,6 +6,9 @@ import storyHands from "@/assets/story-hands.jpg";
 import storyLandscape from "@/assets/story-landscape.jpg";
 import storyCircle from "@/assets/story-circle.jpg";
 import { ParticleField } from "./SiteChrome";
+import { StatusBadge, DataDisclosure } from "./DataStatus";
+import { ContributionComposer, type ContributionMode } from "./Contribution";
+
 
 const SUBTITLES = [
   "Mapping the invisible architecture of human solidarity.",
@@ -227,6 +230,63 @@ export function Hero() {
   );
 }
 
+export function ValueProposition() {
+  return (
+    <section className="relative border-b border-ivory/5 px-6 py-24 md:px-12 md:py-32">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">What is HUMA?</p>
+        <h2 className="mt-6 font-display text-2xl font-light leading-snug text-ivory md:text-4xl">
+          Humanity already contains an immense invisible infrastructure of knowledge, time and
+          mutual aid. HUMA maps it.
+        </h2>
+        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-2xl bg-ivory/5 sm:grid-cols-3">
+          {[
+            { k: "Offer", v: "Offer what you can." },
+            { k: "Ask", v: "Ask for what you need." },
+            { k: "Connect", v: "Connect across borders." },
+          ].map((i) => (
+            <div key={i.k} className="bg-space-black px-6 py-7">
+              <span className="text-[9px] uppercase tracking-[0.3em] text-gold-dust">{i.k}</span>
+              <p className="mt-3 text-sm leading-relaxed text-ivory/60">{i.v}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+          <Link
+            to="/offer"
+            className="w-full rounded-full bg-ivory px-9 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-space-black transition-transform hover:scale-[1.03] sm:w-auto"
+          >
+            Offer something
+          </Link>
+          <Link
+            to="/offer"
+            search={{ mode: "need" }}
+            className="w-full rounded-full border border-ivory/25 px-9 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-ivory transition-colors hover:border-gold-dust hover:text-gold-dust sm:w-auto"
+          >
+            Ask for something
+          </Link>
+          <Link
+            to="/constellation"
+            className="w-full px-4 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-ivory/50 transition-colors hover:text-ivory sm:w-auto"
+          >
+            Explore the constellation →
+          </Link>
+        </div>
+
+        <Link
+          to="/about"
+          className="mt-10 inline-block text-[10px] uppercase tracking-[0.3em] text-ivory/35 transition-colors hover:text-gold-dust"
+        >
+          A civic infrastructure for human solidarity — read more
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+
+
 export function SectionHeader({
   number,
   kicker,
@@ -279,18 +339,24 @@ export function GlobalConstellation() {
             <div className="flex items-center gap-3 rounded-full border border-ivory/10 bg-black/40 px-4 py-2 backdrop-blur-xl">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-aurora shadow-[0_0_10px_currentColor]" />
               <span className="text-[10px] uppercase tracking-[0.25em] text-ivory">
-                14,202 active initiatives
+                14,202 initiatives
               </span>
             </div>
             <div className="flex items-center gap-3 rounded-full border border-ivory/10 bg-black/40 px-4 py-2 backdrop-blur-xl">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-celestial shadow-[0_0_10px_currentColor]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-celestial" />
               <span className="text-[10px] uppercase tracking-[0.25em] text-ivory">
-                Live data feed
+                Prototype feed — not live data
               </span>
             </div>
           </div>
         </div>
+
+        <DataDisclosure status="prototype" className="mt-8">
+          The nodes and counters on this map are prototype content. No live feed of real solidarity
+          activity is connected yet.
+        </DataDisclosure>
       </div>
+
     </section>
   );
 }
@@ -329,50 +395,23 @@ const OFFER_PRINCIPLES = [
   { k: "Anonymity", v: "Visibility is optional. The map values the gesture, not the signature." },
 ];
 
-export function OfferHumanity() {
+export function OfferHumanity({ mode = "offer" }: { mode?: ContributionMode }) {
   return (
     <section className="relative px-6 py-20 md:px-12 md:py-32">
       <div className="mx-auto max-w-2xl text-center">
         <span className="text-[10px] uppercase tracking-[0.4em] text-gold-dust">
-          Section 02 — Offer
+          Section 02 — Offer · Need · Connect
         </span>
-        <h1 className="mt-5 font-display text-3xl font-light text-ivory md:text-4xl">
-          How will you contribute?
-        </h1>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-ivory/50">
-          HUMA is a repository of intent. Whatever you carry — a skill, an hour, a quiet presence —
-          becomes a node in the global map.
+          HUMA is a repository of intent — in both directions. Declare what you can give, or what
+          you are looking for. Both are nodes on the same map.
         </p>
-
-        <form className="mt-16 space-y-10" onSubmit={(e) => e.preventDefault()}>
-          <div className="group relative">
-            <input
-              type="text"
-              placeholder="I can offer..."
-              className="w-full border-b border-ivory/15 bg-transparent py-4 text-center text-xl font-light text-ivory placeholder:text-ivory/15 focus:border-gold-dust focus:outline-none md:text-2xl"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            {["Mentorship", "Knowledge", "Translation", "Time"].map((label) => (
-              <button
-                key={label}
-                type="button"
-                className="rounded-full border border-ivory/10 px-4 py-3 text-[10px] uppercase tracking-[0.25em] text-ivory/70 transition-all hover:border-gold-dust/60 hover:text-ivory"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="submit"
-            className="mt-6 rounded-full bg-ivory px-10 py-4 font-display text-[11px] uppercase tracking-[0.3em] text-space-black transition-transform hover:scale-[1.03]"
-          >
-            Pulse my contribution
-          </button>
-        </form>
       </div>
+
+      <div className="mt-16">
+        <ContributionComposer initialMode={mode} />
+      </div>
+
 
       <div className="mx-auto mt-32 max-w-6xl">
         <div className="mb-16 text-center">
@@ -513,7 +552,12 @@ export function HumanEcho() {
             </div>
           ))}
         </div>
+        <DataDisclosure status="illustrative" className="mt-14 text-left">
+          These propagation figures are illustrative. HUMA does not currently track the real-world
+          relay of a gesture, and does not claim to measure impact.
+        </DataDisclosure>
       </div>
+
 
       <div className="mx-auto mt-32 max-w-4xl">
         <div className="mb-14 text-center">
@@ -567,6 +611,13 @@ export function Stories() {
           align="center"
         />
 
+        <DataDisclosure status="illustrative" className="mb-24">
+          Every story below is labelled. None has been independently verified, so all carry the
+          default status “Illustrative scenario” — written to convey what the network makes
+          possible, not reported as documented fact.
+        </DataDisclosure>
+
+
         <div className="space-y-32">
           {STORIES.map((s, i) => (
             <article key={s.title} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
@@ -594,9 +645,13 @@ export function Stories() {
               </div>
 
               <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                <div className="mb-5">
+                  <StatusBadge status="illustrative-scenario" />
+                </div>
                 <span className={`text-[10px] uppercase tracking-[0.4em] ${s.accent}`}>
                   {s.place}
                 </span>
+
                 <h2 className="mt-4 font-display text-3xl font-light text-ivory md:text-4xl">
                   {s.title}
                 </h2>
@@ -657,8 +712,10 @@ export function Stories() {
                 <span className={`text-[9px] uppercase tracking-[0.3em] ${s.accent}`}>{s.place}</span>
                 <h3 className="mt-4 font-display text-lg font-light text-ivory">{s.title}</h3>
                 <p className="mt-4 text-xs leading-relaxed text-ivory/55">{s.body}</p>
+                <StatusBadge status="illustrative-scenario" className="mt-6" />
               </article>
             ))}
+
           </div>
         </div>
 
@@ -733,6 +790,12 @@ export function EarthPulse() {
             </div>
           ))}
         </div>
+
+        <DataDisclosure status="prototype" className="mt-16">
+          Earth Pulse is a prototype reading. These counters, regional tables and time bands are
+          not measurements of real global activity — no live data source is connected yet.
+        </DataDisclosure>
+
 
         {/* Regional pulse */}
         <div className="mt-32">

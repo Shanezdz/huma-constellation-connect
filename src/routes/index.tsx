@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteChrome";
-import { Hero, SectionIndex } from "@/components/site/sections";
+import { Hero, SectionIndex, ValueProposition } from "@/components/site/sections";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -35,7 +36,9 @@ function Index() {
   return (
     <SiteLayout>
       <Hero />
+      <ValueProposition />
       <SectionIndex />
+
     </SiteLayout>
   );
 }

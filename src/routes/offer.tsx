@@ -1,22 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteChrome";
 import { OfferHumanity } from "@/components/site/sections";
+import type { ContributionMode } from "@/components/site/Contribution";
 
 export const Route = createFileRoute("/offer")({
-  component: () => (
-    <SiteLayout>
-      <OfferHumanity />
-    </SiteLayout>
-  ),
+  validateSearch: (search: Record<string, unknown>): { mode?: ContributionMode } => {
+    const m = search["mode"];
+    return m === "need" || m === "offer" || m === "connect" ? { mode: m } : {};
+  },
+  component: OfferPage,
+
   head: () => ({
     meta: [
-      { title: "Offer your contribution — HUMA" },
+      { title: "Offer or ask — HUMA" },
       {
         name: "description",
         content:
-          "Pulse what you carry — a skill, an hour, a quiet presence — into the planetary HUMA network.",
+          "Declare what you can offer — a skill, an hour, a quiet presence — or what you need. Both become nodes on the HUMA map.",
       },
-      { property: "og:title", content: "Offer your contribution — HUMA" },
+      { property: "og:title", content: "Offer or ask — HUMA" },
+
       {
         property: "og:description",
         content: "Add your gesture to the global constellation of human solidarity.",
@@ -36,3 +39,12 @@ export const Route = createFileRoute("/offer")({
     ],
   }),
 });
+
+function OfferPage() {
+  const { mode } = Route.useSearch();
+  return (
+    <SiteLayout>
+      <OfferHumanity mode={mode ?? "offer"} />
+    </SiteLayout>
+  );
+}
