@@ -214,9 +214,10 @@ export function ManifestoFooter() {
             <div className="space-y-4">
               <span className="text-[9px] uppercase tracking-[0.3em] text-gold-dust">Network</span>
               <ul className="space-y-2 text-xs font-light text-ivory/50">
+                <li><Link to="/about" className="hover:text-ivory">What is HUMA?</Link></li>
                 <li><Link to="/constellation" className="hover:text-ivory">The Collective</Link></li>
-                <li><Link to="/offer" className="hover:text-ivory">Ethical Protocol</Link></li>
-                <li><Link to="/pulse" className="hover:text-ivory">Open Data</Link></li>
+                <li><Link to="/offer" className="hover:text-ivory">Offer something</Link></li>
+                <li><Link to="/offer" search={{ mode: "need" }} className="hover:text-ivory">Ask for something</Link></li>
               </ul>
             </div>
             <div className="space-y-4">
@@ -225,17 +226,22 @@ export function ManifestoFooter() {
                 <li><Link to="/pulse" className="hover:text-ivory">Humanity Pulse</Link></li>
                 <li><Link to="/echo" className="hover:text-ivory">Ripple Effect</Link></li>
                 <li><Link to="/future" className="hover:text-ivory">Horizon</Link></li>
+                <li><Link to="/methodology" className="hover:text-ivory">Methodology &amp; data</Link></li>
               </ul>
             </div>
           </div>
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-ivory/5 pt-8 text-[9px] uppercase tracking-[0.3em] text-ivory/25 md:flex-row">
-          <span>© 2026 HUMA — Planetary Scale</span>
-          <div className="flex gap-6">
+          <span>© 2026 HUMA — Prototype</span>
+          <div className="flex flex-wrap justify-center gap-6">
+            <Link to="/methodology" className="hover:text-ivory">Methodology</Link>
             <Link to="/legal" className="hover:text-ivory">Mentions légales</Link>
             <Link to="/privacy" className="hover:text-ivory">Confidentialité</Link>
           </div>
+        </div>
+
+
         </div>
 
       </div>
