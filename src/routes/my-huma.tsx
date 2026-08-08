@@ -71,6 +71,11 @@ function MyHuma() {
 
   useEffect(() => { void load(); }, []);
 
+  function handleSignOut() {
+    signOut();
+    void navigate({ to: "/enter" });
+  }
+
   async function saveProfile() {
     const current = getSession();
     if (!current) return;
@@ -126,7 +131,7 @@ function MyHuma() {
             <div className="flex flex-wrap gap-3">
               <Link to="/connections" className="rounded-full border border-gold-dust/30 px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-gold-dust hover:bg-gold-dust/10">Signals</Link>
               <Link to="/offer" className="rounded-full bg-ivory px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-space-black">Leave a gesture</Link>
-              <button type="button" onClick={() => { signOut(); void navigate({ to: "/" }); }} className="rounded-full border border-ivory/15 px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-ivory/50 hover:text-ivory">Leave quietly</button>
+              <button type="button" onClick={handleSignOut} className="rounded-full border border-ivory/25 px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-ivory/75 hover:border-ivory/60 hover:text-ivory">Sign out</button>
             </div>
           </div>
 
@@ -140,57 +145,22 @@ function MyHuma() {
               <p className="mt-4 text-sm leading-relaxed text-ivory/40">These details remain private. HUMA can reveal them to one accepted connection only after both people explicitly agree.</p>
             </div>
             <div className="mt-7 grid gap-5 md:grid-cols-3">
-              <label>
-                <span className="text-[9px] uppercase tracking-[0.28em] text-ivory/35">Name or alias</span>
-                <input value={profile.display_name ?? ""} onChange={(e) => setProfile((p) => ({ ...p, display_name: e.target.value }))} placeholder="How you wish to be known" className="mt-3 w-full border-b border-ivory/15 bg-transparent py-3 text-sm text-ivory outline-none placeholder:text-ivory/15 focus:border-gold-dust" />
-              </label>
-              <label>
-                <span className="text-[9px] uppercase tracking-[0.28em] text-ivory/35">Contact method</span>
-                <input value={profile.contact_method ?? ""} onChange={(e) => setProfile((p) => ({ ...p, contact_method: e.target.value }))} placeholder="Email, Signal, LinkedIn…" className="mt-3 w-full border-b border-ivory/15 bg-transparent py-3 text-sm text-ivory outline-none placeholder:text-ivory/15 focus:border-gold-dust" />
-              </label>
-              <label>
-                <span className="text-[9px] uppercase tracking-[0.28em] text-ivory/35">Contact detail</span>
-                <input value={profile.contact_value ?? ""} onChange={(e) => setProfile((p) => ({ ...p, contact_value: e.target.value }))} placeholder="Address, handle or link" className="mt-3 w-full border-b border-ivory/15 bg-transparent py-3 text-sm text-ivory outline-none placeholder:text-ivory/15 focus:border-gold-dust" />
-              </label>
+              <label><span className="text-[9px] uppercase tracking-[0.28em] text-ivory/35">Name or alias</span><input value={profile.display_name ?? ""} onChange={(e) => setProfile((p) => ({ ...p, display_name: e.target.value }))} placeholder="How you wish to be known" className="mt-3 w-full border-b border-ivory/15 bg-transparent py-3 text-sm text-ivory outline-none placeholder:text-ivory/15 focus:border-gold-dust" /></label>
+              <label><span className="text-[9px] uppercase tracking-[0.28em] text-ivory/35">Contact method</span><input value={profile.contact_method ?? ""} onChange={(e) => setProfile((p) => ({ ...p, contact_method: e.target.value }))} placeholder="Email, Signal, LinkedIn…" className="mt-3 w-full border-b border-ivory/15 bg-transparent py-3 text-sm text-ivory outline-none placeholder:text-ivory/15 focus:border-gold-dust" /></label>
+              <label><span className="text-[9px] uppercase tracking-[0.28em] text-ivory/35">Contact detail</span><input value={profile.contact_value ?? ""} onChange={(e) => setProfile((p) => ({ ...p, contact_value: e.target.value }))} placeholder="Address, handle or link" className="mt-3 w-full border-b border-ivory/15 bg-transparent py-3 text-sm text-ivory outline-none placeholder:text-ivory/15 focus:border-gold-dust" /></label>
             </div>
-            <div className="mt-7 flex flex-wrap items-center gap-4">
-              <button type="button" onClick={() => void saveProfile()} disabled={savingProfile} className="rounded-full border border-ivory/15 px-6 py-3 text-[9px] uppercase tracking-[0.26em] text-ivory hover:border-gold-dust/50 hover:text-gold-dust disabled:opacity-40">{savingProfile ? "Saving…" : "Save private contact"}</button>
-              {profileSaved && <span className="text-[10px] text-aurora">Saved privately.</span>}
-            </div>
+            <div className="mt-7 flex flex-wrap items-center gap-4"><button type="button" onClick={() => void saveProfile()} disabled={savingProfile} className="rounded-full border border-ivory/15 px-6 py-3 text-[9px] uppercase tracking-[0.26em] text-ivory hover:border-gold-dust/50 hover:text-gold-dust disabled:opacity-40">{savingProfile ? "Saving…" : "Save private contact"}</button>{profileSaved && <span className="text-[10px] text-aurora">Saved privately.</span>}</div>
           </div>
 
-          {loading ? (
-            <p className="py-24 text-center text-[10px] uppercase tracking-[0.35em] text-ivory/30">Gathering your gestures…</p>
-          ) : gestures.length === 0 ? (
-            <div className="py-28 text-center">
-              <p className="font-display text-3xl font-light text-ivory">Nothing has been left here yet.</p>
-              <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ivory/40">A first gesture can be an offer or a need. HUMA gives both the same dignity.</p>
-            </div>
-          ) : (
-            <div className="mt-12 grid gap-5 md:grid-cols-2">
-              {gestures.map((g) => (
-                <article key={g.id} className={`rounded-3xl border p-6 ${g.is_active ? "border-ivory/10 bg-space-deep/40" : "border-ivory/5 bg-space-deep/20 opacity-55"}`}>
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-[9px] uppercase tracking-[0.32em] text-gold-dust">{g.kind} · {g.category}</span>
-                    <span className="text-[9px] uppercase tracking-[0.24em] text-ivory/30">{g.visibility}</span>
-                  </div>
-                  <h2 className="mt-5 font-display text-2xl font-light text-ivory">{g.title}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-ivory/45">{g.description}</p>
-                  <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-[10px] text-ivory/30">
-                    {g.territory && <span>{g.territory}</span>}
-                    {g.languages?.length > 0 && <span>{g.languages.join(" · ")}</span>}
-                    {g.availability && <span>{g.availability}</span>}
-                    {g.remote_possible && <span>Remote possible</span>}
-                  </div>
-                  <div className="mt-7 flex flex-wrap gap-2 border-t border-ivory/5 pt-5">
-                    <button type="button" onClick={() => void patch(g.id, { visibility: g.visibility === "private" ? "constellation" : "private" })} className="rounded-full border border-ivory/10 px-4 py-2 text-[9px] uppercase tracking-[0.2em] text-ivory/55 hover:border-gold-dust/50 hover:text-gold-dust">{g.visibility === "private" ? "Let constellation see" : "Make private"}</button>
-                    <button type="button" onClick={() => void patch(g.id, { is_active: !g.is_active })} className="rounded-full border border-ivory/10 px-4 py-2 text-[9px] uppercase tracking-[0.2em] text-ivory/55 hover:text-ivory">{g.is_active ? "Let it rest" : "Wake it"}</button>
-                    <button type="button" onClick={() => void remove(g.id)} className="rounded-full px-4 py-2 text-[9px] uppercase tracking-[0.2em] text-ivory/25 hover:text-red-300">Remove</button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
+          {loading ? <p className="py-24 text-center text-[10px] uppercase tracking-[0.35em] text-ivory/30">Gathering your gestures…</p> : gestures.length === 0 ? <div className="py-28 text-center"><p className="font-display text-3xl font-light text-ivory">Nothing has been left here yet.</p><p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ivory/40">A first gesture can be an offer or a need. HUMA gives both the same dignity.</p></div> : <div className="mt-12 grid gap-5 md:grid-cols-2">{gestures.map((g) => <article key={g.id} className={`rounded-3xl border p-6 ${g.is_active ? "border-ivory/10 bg-space-deep/40" : "border-ivory/5 bg-space-deep/20 opacity-55"}`}><div className="flex items-center justify-between gap-4"><span className="text-[9px] uppercase tracking-[0.32em] text-gold-dust">{g.kind} · {g.category}</span><span className="text-[9px] uppercase tracking-[0.24em] text-ivory/30">{g.visibility}</span></div><h2 className="mt-5 font-display text-2xl font-light text-ivory">{g.title}</h2><p className="mt-3 text-sm leading-relaxed text-ivory/45">{g.description}</p><div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-[10px] text-ivory/30">{g.territory && <span>{g.territory}</span>}{g.languages?.length > 0 && <span>{g.languages.join(" · ")}</span>}{g.availability && <span>{g.availability}</span>}{g.remote_possible && <span>Remote possible</span>}</div><div className="mt-7 flex flex-wrap gap-2 border-t border-ivory/5 pt-5"><button type="button" onClick={() => void patch(g.id, { visibility: g.visibility === "private" ? "constellation" : "private" })} className="rounded-full border border-ivory/10 px-4 py-2 text-[9px] uppercase tracking-[0.2em] text-ivory/55 hover:border-gold-dust/50 hover:text-gold-dust">{g.visibility === "private" ? "Let constellation see" : "Make private"}</button><button type="button" onClick={() => void patch(g.id, { is_active: !g.is_active })} className="rounded-full border border-ivory/10 px-4 py-2 text-[9px] uppercase tracking-[0.2em] text-ivory/55 hover:text-ivory">{g.is_active ? "Let it rest" : "Wake it"}</button><button type="button" onClick={() => void remove(g.id)} className="rounded-full px-4 py-2 text-[9px] uppercase tracking-[0.2em] text-ivory/25 hover:text-red-300">Remove</button></div></article>)}</div>}
+
+          <div className="mt-20 border-t border-ivory/10 pt-10">
+            <p className="text-[9px] uppercase tracking-[0.35em] text-gold-dust">Account & privacy</p>
+            <h2 className="mt-4 font-display text-2xl font-light text-ivory">Your way out should be as clear as your way in.</h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-ivory/40">Signing out only ends this session. Your account, gestures and private settings remain in HUMA so you can return later.</p>
+            <button type="button" onClick={handleSignOut} className="mt-6 rounded-full border border-ivory/25 px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-ivory/75 hover:border-ivory/60 hover:text-ivory">Sign out of HUMA</button>
+            <p className="mt-5 text-[10px] leading-relaxed text-ivory/25">Permanent account deletion will be added as a separate protected action. It will never be confused with signing out.</p>
+          </div>
         </div>
       </section>
     </SiteLayout>
