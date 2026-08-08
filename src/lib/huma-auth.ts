@@ -18,7 +18,6 @@ async function authRequest(path: string, body: Record<string, unknown>) {
     method: "POST",
     headers: {
       apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${SUPABASE_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
@@ -77,7 +76,6 @@ export async function publicFetch(path: string, init: RequestInit = {}) {
     ...init,
     headers: {
       apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${SUPABASE_KEY}`,
       "Content-Type": "application/json",
       ...(init.headers || {}),
     },
