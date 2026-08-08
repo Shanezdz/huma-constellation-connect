@@ -88,6 +88,7 @@ function MyHuma() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
+              <Link to="/connections" className="rounded-full border border-gold-dust/30 px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-gold-dust hover:bg-gold-dust/10">Signals</Link>
               <Link to="/offer" className="rounded-full bg-ivory px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-space-black">Leave a gesture</Link>
               <button type="button" onClick={() => { signOut(); void navigate({ to: "/" }); }} className="rounded-full border border-ivory/15 px-6 py-3 text-[9px] uppercase tracking-[0.28em] text-ivory/50 hover:text-ivory">Leave quietly</button>
             </div>
