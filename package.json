@@ -1,5 +1,5 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "huma-constellation-connect",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^3.0.0",
-    "@cloudflare/vite-plugin": "^1.25.5",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/sora": "^5.2.8",
     "@hookform/resolvers": "^5.2.2",
@@ -73,7 +72,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@lovable.dev/vite-tanstack-config": "2.9.1",
     "@types/node": "^22.16.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
