@@ -37,9 +37,7 @@ export async function signUp(email: string, password: string) {
 
 export async function signIn(email: string, password: string): Promise<HumaSession> {
   const data = await authRequest("token?grant_type=password", { email, password });
-  if (typeof window !== "undefined") {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(data));
-  }
+  if (typeof window !== "undefined") localStorage.setItem(SESSION_KEY, JSON.stringify(data));
   return data as HumaSession;
 }
 
@@ -62,7 +60,6 @@ export function signOut() {
 export async function authenticatedFetch(path: string, init: RequestInit = {}) {
   const session = getSession();
   if (!session?.access_token) throw new Error("You need to enter HUMA first.");
-
   return fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
     ...init,
     headers: {
@@ -70,6 +67,18 @@ export async function authenticatedFetch(path: string, init: RequestInit = {}) {
       Authorization: `Bearer ${session.access_token}`,
       "Content-Type": "application/json",
       Prefer: "return=representation",
+      ...(init.headers || {}),
+    },
+  });
+}
+
+export async function publicFetch(path: string, init: RequestInit = {}) {
+  return fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    ...init,
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      "Content-Type": "application/json",
       ...(init.headers || {}),
     },
   });
