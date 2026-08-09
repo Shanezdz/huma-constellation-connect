@@ -5,6 +5,7 @@ export type HumaSession = {
   access_token: string;
   refresh_token?: string;
   expires_in?: number;
+  token_type?: string;
   user: {
     id: string;
     email?: string;
@@ -12,6 +13,15 @@ export type HumaSession = {
 };
 
 const SESSION_KEY = "huma-session";
+
+function saveSession(session: HumaSession) {
+  if (typeof window !== "undefined") localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  return session;
+}
+
+function clearSession() {
+  if (typeof window !== "undefined") localStorage.removeItem(SESSION_KEY);
+}
 
 async function authRequest(path: string, body: Record<string, unknown>) {
   const response = await fetch(`${SUPABASE_URL}/auth/v1/${path}`, {
@@ -36,8 +46,7 @@ export async function signUp(email: string, password: string) {
 
 export async function signIn(email: string, password: string): Promise<HumaSession> {
   const data = await authRequest("token?grant_type=password", { email, password });
-  if (typeof window !== "undefined") localStorage.setItem(SESSION_KEY, JSON.stringify(data));
-  return data as HumaSession;
+  return saveSession(data as HumaSession);
 }
 
 export function getSession(): HumaSession | null {
@@ -47,28 +56,60 @@ export function getSession(): HumaSession | null {
   try {
     return JSON.parse(raw) as HumaSession;
   } catch {
-    localStorage.removeItem(SESSION_KEY);
+    clearSession();
     return null;
   }
 }
 
-export function signOut() {
-  if (typeof window !== "undefined") localStorage.removeItem(SESSION_KEY);
+export async function refreshSession(): Promise<HumaSession> {
+  const current = getSession();
+  if (!current?.refresh_token) {
+    clearSession();
+    throw new Error("Your HUMA session has ended. Please sign in again.");
+  }
+
+  try {
+    const data = await authRequest("token?grant_type=refresh_token", {
+      refresh_token: current.refresh_token,
+    });
+    return saveSession(data as HumaSession);
+  } catch (error) {
+    clearSession();
+    throw error instanceof Error
+      ? error
+      : new Error("Your HUMA session has ended. Please sign in again.");
+  }
 }
 
-export async function authenticatedFetch(path: string, init: RequestInit = {}) {
-  const session = getSession();
-  if (!session?.access_token) throw new Error("You need to enter HUMA first.");
+export function signOut() {
+  clearSession();
+}
+
+async function restFetch(path: string, token: string, init: RequestInit = {}) {
   return fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
     ...init,
     headers: {
       apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${session.access_token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       Prefer: "return=representation",
       ...(init.headers || {}),
     },
   });
+}
+
+export async function authenticatedFetch(path: string, init: RequestInit = {}) {
+  let session = getSession();
+  if (!session?.access_token) throw new Error("You need to enter HUMA first.");
+
+  let response = await restFetch(path, session.access_token, init);
+
+  if (response.status === 401 && session.refresh_token) {
+    session = await refreshSession();
+    response = await restFetch(path, session.access_token, init);
+  }
+
+  return response;
 }
 
 export async function publicFetch(path: string, init: RequestInit = {}) {
