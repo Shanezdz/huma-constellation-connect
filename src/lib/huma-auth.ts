@@ -69,4 +69,26 @@ export async function refreshSession(): Promise<HumaSession> {
 export function signOut() { clearSession(); }
 async function restFetch(path: string, token: string, init: RequestInit = {}) { return fetch(`${SUPABASE_URL}/rest/v1/${path}`, { ...init, headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${token}`, "Content-Type": "application/json", Prefer: "return=representation", ...(init.headers || {}) } }); }
 export async function authenticatedFetch(path: string, init: RequestInit = {}) { let session = getSession(); if (!session?.access_token) throw new Error("You need to enter HUMA first."); let response = await restFetch(path, session.access_token, init); if (response.status === 401 && session.refresh_token) { session = await refreshSession(); response = await restFetch(path, session.access_token, init); } return response; }
-export async function publicFetch(path: string, init: RequestInit = {}) { return fetch(`${SUPABASE_URL}/rest/v1/${path}`, { ...init, headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", ...(init.headers || {}) } }); }
+export async function publicFetch(path: string, init: RequestInit = {}) {
+  const session = getSession();
+  const token = session?.access_token || SUPABASE_KEY;
+  let response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    ...init,
+    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${token}`, "Content-Type": "application/json", ...(init.headers || {}) },
+  });
+  if (response.status === 401 && session?.refresh_token) {
+    try {
+      const renewed = await refreshSession();
+      response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+        ...init,
+        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${renewed.access_token}`, "Content-Type": "application/json", ...(init.headers || {}) },
+      });
+    } catch {
+      response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+        ...init,
+        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", ...(init.headers || {}) },
+      });
+    }
+  }
+  return response;
+}
