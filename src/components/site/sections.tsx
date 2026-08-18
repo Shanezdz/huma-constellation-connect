@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import earthImg from "@/assets/earth-constellation.jpg";
+import earthImgWebp from "@/assets/webp/earth-constellation.webp";
 import storyHands from "@/assets/story-hands.jpg";
+import storyHandsWebp from "@/assets/webp/story-hands.webp";
 import storyLandscape from "@/assets/story-landscape.jpg";
+import storyLandscapeWebp from "@/assets/webp/story-landscape.webp";
 import storyCircle from "@/assets/story-circle.jpg";
+import storyCircleWebp from "@/assets/webp/story-circle.webp";
 import { ParticleField } from "./SiteChrome";
 import { StatusBadge, DataDisclosure } from "./DataStatus";
 import { ContributionComposer, type ContributionMode } from "./Contribution";
@@ -28,6 +32,7 @@ export const STORIES = [
     title: "The Master & The Apprentice",
     body: "A retired calligrapher is teaching digital typography to four hundred students across Brazil through the HUMA protocol.",
     img: storyHands,
+    imgWebp: storyHandsWebp,
     chapters: [
       "Hiroshi Tanaka spent fifty-two years perfecting the gesture of a single brushstroke. When his hands began to tremble, he assumed his teaching life was over. A São Paulo design student wrote to him about the spacing of Japanese letterforms in a poster she could not finish.",
       "He answered in three pages of handwritten notes, scanned by his granddaughter and translated by a stranger in Porto. The reply moved through screens for a week before reaching her. She made the poster. She sent it back.",
@@ -46,6 +51,7 @@ export const STORIES = [
     title: "The Water Weaver",
     body: "One local solution for atmospheric water harvesting, shared with community leaders in twelve arid regions worldwide.",
     img: storyLandscape,
+    imgWebp: storyLandscapeWebp,
     chapters: [
       "Akinyi Otieno is an agricultural engineer who, with three neighbours and a stack of welded mesh, built a fog-harvesting array on a hill above her village. It produced sixty liters of drinkable water on its first morning.",
       "She filmed the assembly on a borrowed phone and uploaded a twenty-three minute tutorial. No music, no editing, no English subtitles — only her voice in Dholuo, naming each angle and weld.",
@@ -64,6 +70,7 @@ export const STORIES = [
     title: "The Listening Project",
     body: "Anonymous psychological support networks bridging generations of isolated individuals through the winter months.",
     img: storyCircle,
+    imgWebp: storyCircleWebp,
     chapters: [
       "In the long Icelandic winter, a small collective of off-duty nurses, fishermen and grandmothers began answering an unlisted phone line for anyone who could not bear the dark alone. No diagnoses. No advice. Only listening.",
       "Within two seasons the network grew to one hundred and eighty voices across the country, then jumped — through a single emigrated daughter — to Murmansk, Tromsø, Nuuk, and finally to a winter shelter in Ushuaia at the other end of the planet.",
@@ -625,14 +632,17 @@ export function Stories() {
             <article key={s.title} className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
               <div className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}>
                 <div className="overflow-hidden border border-ivory/10 bg-space-deep">
-                  <img
-                    src={s.img}
-                    alt={s.title}
-                    loading="lazy"
-                    width={800}
-                    height={1066}
-                    className="aspect-[3/4] h-full w-full object-cover grayscale transition-all duration-1000 hover:grayscale-0"
-                  />
+                  <picture>
+                    <source srcSet={s.imgWebp} type="image/webp" />
+                    <img
+                      src={s.img}
+                      alt={s.title}
+                      loading="lazy"
+                      width={800}
+                      height={1066}
+                      className="aspect-[3/4] h-full w-full object-cover grayscale transition-all duration-1000 hover:grayscale-0"
+                    />
+                  </picture>
                 </div>
                 <div className="mt-8 grid grid-cols-3 gap-4 border-t border-ivory/10 pt-6">
                   {s.impact.map((m) => (

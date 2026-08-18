@@ -2,7 +2,55 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteChrome";
 import { LiveConstellation } from "@/components/site/LiveConstellation";
 
+type Entry = {
+  id: string;
+  recipient_id: string;
+  kind: "offer" | "need";
+  category: string;
+  title: string;
+  description: string;
+  territory: string | null;
+  languages: string[] | null;
+  remote_possible: boolean | null;
+  availability: string | null;
+  created_at: string;
+};
+
+async function fetchConstellationData(): Promise<Entry[]> {
+  const SUPABASE_URL = process.env.VITE_SUPABASE_URL || "";
+  const SUPABASE_KEY = process.env.VITE_SUPABASE_KEY || "";
+  
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    return [];
+  }
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/constellation_entries?select=*&order=created_at.desc&limit=60`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    
+    if (!response.ok) {
+      return [];
+    }
+    
+    return await response.json();
+  } catch {
+    return [];
+  }
+}
+
 export const Route = createFileRoute("/constellation")({
+  loader: async () => {
+    const entries = await fetchConstellationData();
+    return { entries };
+  },
   component: () => (
     <SiteLayout>
       <LiveConstellation />

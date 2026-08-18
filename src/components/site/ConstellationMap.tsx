@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import earthImg from "@/assets/earth-constellation.jpg";
+import earthImgWebp from "@/assets/webp/earth-constellation.webp";
 import {
   CONTRIBUTION_CATEGORIES,
   ILLUSTRATIVE_CONTRIBUTIONS,
@@ -89,14 +90,17 @@ export function ConstellationMap() {
 
       {/* Map */}
       <div className="relative mt-8 aspect-video overflow-hidden rounded-2xl border border-ivory/10 bg-space-deep">
-        <img
-          src={earthImg}
-          alt="Earth at night with luminous nodes representing human solidarity connections"
-          loading="lazy"
-          width={1920}
-          height={1080}
-          className="h-full w-full object-cover opacity-70"
-        />
+        <picture>
+          <source srcSet={earthImgWebp} type="image/webp" />
+          <img
+            src={earthImg}
+            alt="Earth at night with luminous nodes representing human solidarity connections"
+            loading="lazy"
+            width={1920}
+            height={1080}
+            className="h-full w-full object-cover opacity-70"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-space-black via-transparent to-transparent" />
 
         {nodes.map(({ node, visible }) => {

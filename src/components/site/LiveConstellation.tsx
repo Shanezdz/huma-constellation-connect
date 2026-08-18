@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { Link, useRouteLoaderData } from "@tanstack/react-router";
 import { ParticleField } from "./SiteChrome";
-import { authenticatedFetch, getSession, publicFetch } from "@/lib/huma-auth";
+import { authenticatedFetch, getSession } from "@/lib/huma-auth";
 
 type Entry = {
   id: string;
@@ -18,25 +18,11 @@ type Entry = {
 };
 
 export function LiveConstellation() {
-  const [entries, setEntries] = useState<Entry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const routeData = useRouteLoaderData("/constellation") as { entries: Entry[] } | undefined;
+  const entries = routeData?.entries || [];
   const [filter, setFilter] = useState<"all" | "offer" | "need">("all");
   const [connecting, setConnecting] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    publicFetch("constellation_entries?select=*&order=created_at.desc&limit=60")
-      .then(async (res) => {
-        if (!res.ok) throw new Error("The constellation could not be read.");
-        const data = (await res.json()) as Entry[];
-        if (!cancelled) setEntries(data);
-      })
-      .catch((err) => !cancelled && setError(err instanceof Error ? err.message : "The constellation could not be read."))
-      .finally(() => !cancelled && setLoading(false));
-    return () => { cancelled = true; };
-  }, []);
 
   async function requestConnection(entry: Entry) {
     const session = getSession();
@@ -93,9 +79,7 @@ export function LiveConstellation() {
           {notice && <p className="mx-auto mt-7 max-w-xl text-sm leading-relaxed text-gold-dust/80">{notice}</p>}
         </div>
 
-        {loading && <p className="mt-20 text-center text-[10px] uppercase tracking-[0.35em] text-ivory/30">Listening for the constellation…</p>}
-        {error && <p className="mt-20 text-center text-sm text-red-300">{error}</p>}
-        {!loading && !error && shown.length === 0 && (
+        {shown.length === 0 && (
           <div className="mx-auto mt-20 max-w-xl rounded-3xl border border-ivory/10 bg-space-deep/40 p-10 text-center">
             <p className="font-display text-2xl font-light text-ivory">No visible gestures yet.</p>
             <p className="mt-4 text-sm leading-relaxed text-ivory/40">The constellation begins when someone chooses to let a gesture become visible.</p>

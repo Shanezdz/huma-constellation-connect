@@ -142,6 +142,7 @@ export async function publicFetch(path: string, init: RequestInit = {}) {
       apikey: SUPABASE_KEY,
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      "Cache-Control": "public, max-age=300, stale-while-revalidate=600",
       ...(init.headers || {}),
     },
   });
