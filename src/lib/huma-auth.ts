@@ -6,6 +6,7 @@ import {
   refreshSession as refreshSessionFn,
   requestPasswordReset as requestPasswordResetFn,
   updatePassword as updatePasswordFn,
+  establishRecoverySessionFromUrl as establishRecoverySessionFromUrlFn,
 } from "./auth.functions";
 import { checkRateLimit, recordAttempt, resetAttempts } from "./rate-limiter";
 
@@ -88,6 +89,10 @@ export async function requestPasswordReset(email: string) {
 
 export async function updatePassword(password: string) {
   return updatePasswordFn({ data: { password } });
+}
+
+export async function establishRecoverySessionFromUrl() {
+  return establishRecoverySessionFromUrlFn({ data: undefined });
 }
 
 export async function authenticatedFetch(path: string, init: RequestInit = {}) {

@@ -194,3 +194,42 @@ export const updatePassword = createServerFn({ method: "POST" })
 
     return { success: true };
   });
+
+export const establishRecoverySessionFromUrl = createServerFn({ method: "GET" })
+  .handler(async ({ request }) => {
+    const url = new URL(request.url);
+    const hashParams = new URLSearchParams(url.hash.substring(1));
+    const accessToken = hashParams.get("access_token");
+    const refreshToken = hashParams.get("refresh_token");
+    const type = hashParams.get("type");
+
+    if (type !== "recovery" || !accessToken) {
+      return null;
+    }
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+        method: "GET",
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        return null;
+      }
+
+      const user = await response.json();
+      const session: HumaSession = {
+        access_token: accessToken,
+        refresh_token: refreshToken || undefined,
+        user: { id: user.id, email: user.email },
+      };
+
+      setSessionCookies(session);
+      return { success: true, user: session.user };
+    } catch {
+      return null;
+    }
+  });

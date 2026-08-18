@@ -82,8 +82,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
-      { rel: "apple-touch-icon", href: "/favicon.png" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "apple-touch-icon", href: "/favicon.svg" },
     ],
     scripts: [
       {
@@ -93,7 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "HUMA",
           url: "https://huma-constellation-connect.vercel.app",
-          logo: "https://huma-constellation-connect.vercel.app/favicon.png",
+          logo: "https://huma-constellation-connect.vercel.app/favicon.svg",
           description:
             "HUMA is a poetic digital ecosystem that visualizes, connects, and amplifies global human solidarity.",
         }),
@@ -113,6 +113,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-gold-dust focus:px-4 focus:py-2 focus:text-sm focus:text-space-black"
+        >
+          Skip to content
+        </a>
         {children}
         <Scripts />
       </body>

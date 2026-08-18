@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://huma-constellation-connect.lovable.app/sitemap.xml
+Sitemap: https://huma-constellation-connect.vercel.app/sitemap.xml

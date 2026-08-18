@@ -149,6 +149,7 @@ function itemProps(item: NavItem) {
 function DesktopGroup({ group }: { group: (typeof NAV_GROUPS)[number] }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -164,6 +165,13 @@ function DesktopGroup({ group }: { group: (typeof NAV_GROUPS)[number] }) {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (open && menuRef.current) {
+      const firstLink = menuRef.current.querySelector("a");
+      if (firstLink) firstLink.focus();
+    }
+  }, [open]);
+
   return (
     <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button type="button" aria-haspopup="true" aria-expanded={open} onClick={() => setOpen((v) => !v)} className={`transition-colors hover:text-ivory ${open ? "text-ivory" : ""}`}>
@@ -171,10 +179,10 @@ function DesktopGroup({ group }: { group: (typeof NAV_GROUPS)[number] }) {
       </button>
       {open && (
         <div className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-4">
-          <ul className="overflow-hidden rounded-2xl border border-ivory/10 bg-space-black/95 py-2 backdrop-blur-xl">
+          <ul ref={menuRef} role="menu" className="overflow-hidden rounded-2xl border border-ivory/10 bg-space-black/95 py-2 backdrop-blur-xl">
             {group.items.map((item) => (
-              <li key={item.label}>
-                <Link {...itemProps(item as NavItem)} onClick={() => setOpen(false)} className="block px-5 py-3 transition-colors hover:bg-ivory/5">
+              <li key={item.label} role="none">
+                <Link {...itemProps(item as NavItem)} role="menuitem" onClick={() => setOpen(false)} className="block px-5 py-3 transition-colors hover:bg-ivory/5 focus:bg-ivory/5 focus:outline-none">
                   <span className="block text-[10px] uppercase tracking-[0.25em] text-ivory">{item.label}</span>
                   <span className="mt-1 block text-[10px] normal-case tracking-normal text-ivory/35">{item.hint}</span>
                 </Link>
@@ -307,5 +315,5 @@ export function ManifestoFooter() {
 }
 
 export function SiteLayout({ children }: { children: ReactNode }) {
-  return <div className="relative min-h-screen bg-space-black text-ivory"><div className="grain-overlay pointer-events-none fixed inset-0 z-50" /><Nav /><main className="pt-24">{children}</main><ManifestoFooter /></div>;
+  return <div className="relative min-h-screen bg-space-black text-ivory"><div className="grain-overlay pointer-events-none fixed inset-0 z-50" /><Nav /><main id="main-content" className="pt-24">{children}</main><ManifestoFooter /></div>;
 }
