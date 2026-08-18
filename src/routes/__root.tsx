@@ -75,6 +75,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "HUMA" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      {
+        "http-equiv": "Content-Security-Policy",
+        content: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://ai.gateway.lovable.dev; frame-src 'none'; object-src 'none'",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -88,8 +92,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "HUMA",
-          url: "https://huma-constellation-connect.lovable.app",
-          logo: "https://huma-constellation-connect.lovable.app/favicon.png",
+          url: "https://huma-constellation-connect.vercel.app",
+          logo: "https://huma-constellation-connect.vercel.app/favicon.png",
           description:
             "HUMA is a poetic digital ecosystem that visualizes, connects, and amplifies global human solidarity.",
         }),

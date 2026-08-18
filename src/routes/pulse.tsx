@@ -21,16 +21,16 @@ export const Route = createFileRoute("/pulse")({
         property: "og:description",
         content: "The collective frequency of human solidarity, live.",
       },
-      { property: "og:url", content: "https://huma-constellation-connect.lovable.app/pulse" },
+      { property: "og:url", content: "https://huma-constellation-connect.vercel.app/pulse" },
       {
         property: "og:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-pulse.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-pulse.jpg",
       },
       {
         name: "twitter:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-pulse.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-pulse.jpg",
       },
     ],
-    links: [{ rel: "canonical", href: "https://huma-constellation-connect.lovable.app/pulse" }],
+    links: [{ rel: "canonical", href: "https://huma-constellation-connect.vercel.app/pulse" }],
   }),
 });

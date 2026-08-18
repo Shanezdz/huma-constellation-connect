@@ -21,18 +21,18 @@ export const Route = createFileRoute("/stories")({
         property: "og:description",
         content: "Read the invisible threads holding the world together.",
       },
-      { property: "og:url", content: "https://huma-constellation-connect.lovable.app/stories" },
+      { property: "og:url", content: "https://huma-constellation-connect.vercel.app/stories" },
       {
         property: "og:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-stories.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-stories.jpg",
       },
       {
         name: "twitter:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-stories.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-stories.jpg",
       },
     ],
     links: [
-      { rel: "canonical", href: "https://huma-constellation-connect.lovable.app/stories" },
+      { rel: "canonical", href: "https://huma-constellation-connect.vercel.app/stories" },
     ],
   }),
 });

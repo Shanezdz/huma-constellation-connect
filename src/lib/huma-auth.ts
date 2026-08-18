@@ -1,5 +1,5 @@
-const SUPABASE_URL = "https://kppcwvtmabenontexzkw.supabase.co";
-const SUPABASE_KEY = "sb_publishable_jsMEZK901PHvxVjcplSWgQ_3SCl9pRe";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY as string;
 
 export type HumaSession = {
   access_token: string;

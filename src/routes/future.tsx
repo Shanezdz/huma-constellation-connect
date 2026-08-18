@@ -21,18 +21,18 @@ export const Route = createFileRoute("/future")({
         property: "og:description",
         content: "When cooperation becomes infrastructure.",
       },
-      { property: "og:url", content: "https://huma-constellation-connect.lovable.app/future" },
+      { property: "og:url", content: "https://huma-constellation-connect.vercel.app/future" },
       {
         property: "og:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-future.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-future.jpg",
       },
       {
         name: "twitter:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-future.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-future.jpg",
       },
     ],
     links: [
-      { rel: "canonical", href: "https://huma-constellation-connect.lovable.app/future" },
+      { rel: "canonical", href: "https://huma-constellation-connect.vercel.app/future" },
     ],
   }),
 });

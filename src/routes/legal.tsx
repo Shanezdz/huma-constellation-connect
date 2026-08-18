@@ -16,9 +16,9 @@ export const Route = createFileRoute("/legal")({
         property: "og:description",
         content: "Éditeur, hébergement et propriété intellectuelle de HUMA.",
       },
-      { property: "og:url", content: "https://huma-constellation-connect.lovable.app/legal" },
+      { property: "og:url", content: "https://huma-constellation-connect.vercel.app/legal" },
     ],
-    links: [{ rel: "canonical", href: "https://huma-constellation-connect.lovable.app/legal" }],
+    links: [{ rel: "canonical", href: "https://huma-constellation-connect.vercel.app/legal" }],
   }),
 });
 

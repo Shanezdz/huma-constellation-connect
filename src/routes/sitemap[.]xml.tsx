@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://huma-constellation-connect.lovable.app";
+const BASE_URL = "https://huma-constellation-connect.vercel.app";
 
 const paths = ["/", "/about", "/constellation", "/offer", "/echo", "/stories", "/pulse", "/future", "/methodology", "/organisations", "/legal", "/privacy"];
 

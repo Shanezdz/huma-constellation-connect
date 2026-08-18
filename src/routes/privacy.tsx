@@ -17,9 +17,9 @@ export const Route = createFileRoute("/privacy")({
         content:
           "Comment HUMA traite les données personnelles : finalités, conservation et droits.",
       },
-      { property: "og:url", content: "https://huma-constellation-connect.lovable.app/privacy" },
+      { property: "og:url", content: "https://huma-constellation-connect.vercel.app/privacy" },
     ],
-    links: [{ rel: "canonical", href: "https://huma-constellation-connect.lovable.app/privacy" }],
+    links: [{ rel: "canonical", href: "https://huma-constellation-connect.vercel.app/privacy" }],
   }),
 });
 

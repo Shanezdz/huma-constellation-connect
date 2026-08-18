@@ -17,17 +17,17 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "A civic infrastructure for mapping and activating human solidarity.",
       },
-      { property: "og:url", content: "https://huma-constellation-connect.lovable.app/about" },
+      { property: "og:url", content: "https://huma-constellation-connect.vercel.app/about" },
       {
         property: "og:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-home.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-home.jpg",
       },
       {
         name: "twitter:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-home.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-home.jpg",
       },
     ],
-    links: [{ rel: "canonical", href: "https://huma-constellation-connect.lovable.app/about" }],
+    links: [{ rel: "canonical", href: "https://huma-constellation-connect.vercel.app/about" }],
   }),
 });
 

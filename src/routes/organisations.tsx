@@ -21,21 +21,21 @@ export const Route = createFileRoute("/organisations")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         property: "og:url",
-        content: "https://huma-constellation-connect.lovable.app/organisations",
+        content: "https://huma-constellation-connect.vercel.app/organisations",
       },
       {
         property: "og:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-home.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-home.jpg",
       },
       {
         name: "twitter:image",
-        content: "https://huma-constellation-connect.lovable.app/og/og-home.jpg",
+        content: "https://huma-constellation-connect.vercel.app/og/og-home.jpg",
       },
     ],
     links: [
       {
         rel: "canonical",
-        href: "https://huma-constellation-connect.lovable.app/organisations",
+        href: "https://huma-constellation-connect.vercel.app/organisations",
       },
     ],
   }),

@@ -19,11 +19,11 @@ export const Route = createFileRoute("/methodology")({
       },
       {
         property: "og:url",
-        content: "https://huma-constellation-connect.lovable.app/methodology",
+        content: "https://huma-constellation-connect.vercel.app/methodology",
       },
     ],
     links: [
-      { rel: "canonical", href: "https://huma-constellation-connect.lovable.app/methodology" },
+      { rel: "canonical", href: "https://huma-constellation-connect.vercel.app/methodology" },
     ],
   }),
 });

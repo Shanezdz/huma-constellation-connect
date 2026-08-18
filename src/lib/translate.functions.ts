@@ -2,32 +2,33 @@ import { createServerFn } from "@tanstack/react-start";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { generateText } from "ai";
 import { getRequestHeader } from "@tanstack/react-start/server";
+import { z } from "zod";
 
-type Input = { texts: string[]; target: "fr" | "ar" };
+const InputSchema = z.object({
+  texts: z.array(z.string().max(500)).max(400),
+  target: z.enum(["fr", "ar"]),
+}).refine(
+  (data) => {
+    const totalChars = data.texts.reduce((sum, t) => sum + t.length, 0);
+    return totalChars <= 20_000;
+  },
+  { message: "Total character limit exceeded" }
+);
+
+type Input = z.infer<typeof InputSchema>;
 
 const LANG_LABEL: Record<Input["target"], string> = {
   fr: "French",
   ar: "Arabic (Modern Standard, RTL)",
 };
 
-const MAX_TEXTS = 400;
-const MAX_TEXT_LEN = 500;
-const MAX_TOTAL_CHARS = 20_000;
-
 export const translateBatch = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => {
-    const d = data as Input;
-    if (!d || !Array.isArray(d.texts)) throw new Error("Invalid input");
-    if (d.target !== "fr" && d.target !== "ar") throw new Error("Invalid target");
-    if (d.texts.length > MAX_TEXTS) throw new Error("Too many texts");
-    const texts = d.texts.map((s) => String(s));
-    let total = 0;
-    for (const s of texts) {
-      if (s.length > MAX_TEXT_LEN) throw new Error("Text too long");
-      total += s.length;
-      if (total > MAX_TOTAL_CHARS) throw new Error("Payload too large");
+    const result = InputSchema.safeParse(data);
+    if (!result.success) {
+      throw new Error(result.error.errors[0]?.message || "Invalid input");
     }
-    return { texts, target: d.target };
+    return result.data;
   })
   .handler(async ({ data }) => {
     // Same-origin guard: this endpoint exists only to serve our own UI.
