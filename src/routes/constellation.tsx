@@ -26,7 +26,7 @@ async function fetchConstellationData(): Promise<Entry[]> {
 
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/constellation_entries?select=*&order=created_at.desc&limit=60`,
+      `${SUPABASE_URL}/rest/v1/contributions?select=id,recipient_id,kind,category,title,description,territory,languages,remote_possible,availability,created_at&visibility=eq.constellation&is_active=eq.true&order=created_at.desc&limit=60`,
       {
         headers: {
           apikey: SUPABASE_KEY,
@@ -48,8 +48,12 @@ async function fetchConstellationData(): Promise<Entry[]> {
 
 export const Route = createFileRoute("/constellation")({
   loader: async () => {
-    const entries = await fetchConstellationData();
-    return { entries };
+    try {
+      const entries = await fetchConstellationData();
+      return { entries };
+    } catch {
+      return { entries: [] };
+    }
   },
   component: () => (
     <SiteLayout>
