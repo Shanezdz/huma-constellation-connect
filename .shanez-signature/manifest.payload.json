@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "type": "repository-attestation",
+  "repository": {
+    "owner": "Shanezdz",
+    "name": "huma-constellation-connect",
+    "remote": "https://github.com/Shanezdz/huma-constellation-connect.git"
+  },
+  "commit": {
+    "sha": "9eec9481aeca2749401bb32b3fbf8f769a1935eb",
+    "short": "9eec948",
+    "message": "fix: correct Supabase table name in constellation loader"
+  },
+  "timestamp": "2026-08-20T12:04:20Z",
+  "signer": {
+    "signer_id": "SK-ID-2026-04209EFE",
+    "full_name": "Shanez Kechroud",
+    "professional_title": "Communication Strategy Architect",
+    "organization": "Shanez Digital"
+  },
+  "attestation": {
+    "purpose": "Repository state attestation",
+    "reason": "Cryptographic project-state attestation",
+    "location": "Algeria"
+  }
+}

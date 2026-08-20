@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "documentId": "SK-2026-2C442CA0",
+  "documentHash": "a59d540772cdd0e5d15a4e8c0079b4fe69f1c7ef834fef4015097569fdeaf46d",
+  "signerId": "SK-ID-2026-04209EFE",
+  "signer": {
+    "fullName": "Shanez Kechroud",
+    "professionalTitle": "Communication Strategy Architect | CSR/RSO, impact campaigns & training | Digital solutions for institutions, NGOs & responsible businesses"
+  },
+  "timestamp": "2026-08-20T12:04:21.462Z",
+  "algorithm": "Ed25519",
+  "publicKeyFingerprint": "59db7a139c2fb49f06c37b3a1a01252658f2a9cd3ef78306ae28d6b25bcb1ea2",
+  "signatureVersion": 1,
+  "signature": "7UeLBABp3H1pcklvyksxOzsfIGyiG3UOl1fpTHys/qlBiu49d9KFepQFn7LnPcZzsSrQajAYM6JWuxVZBgwWDA==",
+  "publicKeySpkiBase64": "MCowBQYDK2VwAyEAvZf4KWSx2soWLwzCVESXklnqbQI/mQsr0lb5KSxnNbg=",
+  "keyStatus": "ACTIVE",
+  "reason": "Cryptographic project-state attestation",
+  "location": "Algeria"
+}
