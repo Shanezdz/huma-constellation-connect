@@ -1,0 +1,19 @@
+{
+  "documentId": "huma-constellation-connect-MANIFEST-2026",
+  "manifestFile": "manifest.payload.json",
+  "documentHash": "c5683d0e5370e6a741d47471e68ed70e691ffcd42cb6a181f61d384be4e40062",
+  "signature": "1J1pJboD1mgY7h94W1mz8fuyVzmy3PKShG8fOkycEOkfpfQG0puYxVDwX3/ErPbL3G29N2QeiwCmXvhfOUhaAQ==",
+  "signatureAlgorithm": "Ed25519",
+  "signingTimestamp": "2026-08-20T11:16:33.000Z",
+  "signer": {
+    "signerId": "SK-ID-2026-04209EFE",
+    "fullName": "Shanez Kechroud",
+    "publicKeyFingerprint": "59db7a139c2fb49f06c37b3a1a01252658f2a9cd3ef78306ae28d6b25bcb1ea2"
+  },
+  "attestation": {
+    "project": "huma-constellation-connect",
+    "repository": "Shanezdz/huma-constellation-connect",
+    "branch": "main",
+    "commit": "9eec9481aeca2749401bb32b3fbf8f769a1935eb"
+  }
+}
